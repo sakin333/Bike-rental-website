@@ -1,0 +1,48 @@
+.main-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+mat-card-title {
+    margin-bottom: 1em;
+}
+
+mat-card {
+  width: 400px;
+  margin: 2em auto;
+  padding: 2em;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 1em;
+  position: relative;
+}
+
+mat-error {
+  margin-left: -1.5em;
+}
+
+button {
+  margin-top: 1em;
+}
+
+.eye-icon {
+    position: absolute;
+    top: -2em;
+    right: 0;
+}
+
+@media (max-width: 600px) {
+  mat-card {
+    max-width: 90%;
+  }
+}

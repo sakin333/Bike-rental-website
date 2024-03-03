@@ -1,0 +1,23 @@
+.mat-toolbar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.navbar-title {
+    font-size: 1em;
+    color: #fff;
+}
+  
+.button-container {
+    display: flex;
+    align-items: center;
+}
+  
+.login-button {
+    margin-right: 10px;
+}
+  
+.signup-button {
+    margin-left: 10px;
+}
+  
