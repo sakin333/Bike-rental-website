@@ -40,20 +40,25 @@ export class LoginComponent {
       this.authService.logIn(credentials).subscribe({
         next: (res: any) => {
           // console.log('here',res)
-          const USERDETAILS = {
-            username: res.result.data.username,
-            email: res.result.data.email,
-            role: res.result.data.role
-          }
-          const TOKEN = res.result.token
-          localStorage.setItem("user", JSON.stringify(USERDETAILS))
-          localStorage.setItem("token", TOKEN)
-          if(this.authService.isAdmin()) {
-            this.openSnackBar("Welcome admin", "Close", "success-snackbar")
-            this.router.navigateByUrl('/admin/dashboard')
+          if(res.success) {
+            const USERDETAILS = {
+              id: res.result.data._id,
+              username: res.result.data.username,
+              email: res.result.data.email,
+              role: res.result.data.role
+            }
+            const TOKEN = res.result.token
+            localStorage.setItem("user", JSON.stringify(USERDETAILS))
+            localStorage.setItem("token", TOKEN)
+            if(this.authService.isAdmin()) {
+              this.openSnackBar("Welcome admin", "Close", "success-snackbar")
+              this.router.navigateByUrl('/admin/dashboard')
+            }else {
+              this.openSnackBar(`Welcome ${USERDETAILS.username}`, "Close", "success-snackbar")
+              this.router.navigateByUrl('/customer/dashboard')
+            }
           }else {
-            this.openSnackBar(`Welcome ${USERDETAILS.username}`, "Close", "success-snackbar")
-            this.router.navigateByUrl('/customer/dashboard')
+            this.openSnackBar(res.error, "Close", "error-snackbar")
           }
         },
         error: (err) => {

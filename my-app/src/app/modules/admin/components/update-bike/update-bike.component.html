@@ -1,0 +1,56 @@
+<div class="main-container">
+    <mat-card>
+      <mat-card-title> List a bike </mat-card-title>
+      <form [formGroup]="updateForm" (ngSubmit)="onUpdateBike()">
+        <div>
+          <mat-form-field>
+            <mat-label>Bike Brand</mat-label>
+            <mat-select formControlName="bike_brand" required>
+            <mat-option *ngFor="let item of bikeBrands" value="{{item}}">{{item}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+  
+          <mat-form-field>
+            <mat-label>Bike Name</mat-label>
+            <input matInput type="text" formControlName="bike_name" required />
+          </mat-form-field>
+        </div>
+  
+        <div>
+          <mat-form-field>
+            <mat-label>Model Year</mat-label>
+            <mat-select formControlName="model_year" required>
+              <mat-option *ngFor="let item of modelYears" value="{{item}}">{{item}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+  
+          <mat-form-field>
+            <mat-label>Color</mat-label>
+            <mat-select formControlName="color" required>
+              <mat-option *ngFor="let item of colors" value="{{item}}">{{item}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+  
+        <div>
+          <mat-form-field>
+            <mat-label>Price</mat-label>
+            <input matInput type="number" formControlName="price" required />
+          </mat-form-field>
+  
+          <mat-form-field>
+            <mat-label>Image URL</mat-label>
+            <input matInput formControlName="image" />
+          </mat-form-field>
+        </div>
+  
+        <mat-form-field>
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description"></textarea>
+        </mat-form-field>
+  
+        <button mat-raised-button type="submit" color="primary">Update</button>
+      </form>
+    </mat-card>
+  </div>
+  

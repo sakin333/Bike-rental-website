@@ -1,0 +1,11 @@
+<h2 *ngIf="!bookedBikesAvailable">No bookings available</h2>
+
+<table *ngIf="bookedBikesAvailable">
+  <tr>
+    <th>Bike Name</th>
+    <th>From Date</th>
+    <th>To Date</th>
+    <th>Price</th>
+    <th>Status</th>
+  </tr>
+</table>

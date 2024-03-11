@@ -42,6 +42,10 @@ export class AuthService {
     return user.role === "CUSTOMER"
   }
 
+  isLoggedIn() {
+    return this.isAdmin() || this.isCustomer()
+  }
+
   logout() {
     localStorage.removeItem("token")
     localStorage.removeItem("user")
