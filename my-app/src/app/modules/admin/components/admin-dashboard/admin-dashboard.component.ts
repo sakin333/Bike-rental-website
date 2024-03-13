@@ -39,14 +39,12 @@ export class AdminDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllBikes();
-    console.log('My bikes', this.allBikes);
   }
 
   getAllBikes() {
     this.adminService.getAllBikes().subscribe({
       next: (res: any) => {
         if(res.success) {
-          console.log('here', res);
           this.allBikes = res.result;
         }else {
           this.snackbar.openSnackBar(res.error, 'Close', 'error-snackbar');

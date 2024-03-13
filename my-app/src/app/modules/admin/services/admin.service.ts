@@ -12,6 +12,12 @@ export class AdminService {
 
   constructor(private http: HttpClient, private authServcie: AuthService) { }
 
+  getUsers() {
+    return this.http.get(`${default_url}/users`, {
+      headers: this.createAuthorizationHeader()
+    })
+  }
+
   addBike(bike: Bike) {
     return this.http.post(`${default_url}/addBike`, bike, {
       headers: this.createAuthorizationHeader()
@@ -35,6 +41,18 @@ export class AdminService {
       headers: this.createAuthorizationHeader()
     })
   }
+
+  changeBookingStatus(bookingId: string, status: string) {
+    return this.http.post(`${default_url}/admin/booking?bookingId=${bookingId}&status=${status}`, {
+      headers: this.createAuthorizationHeader()
+    })
+  }
+
+  // approveBooking(userId: string, bikeId: string, bike: Bike) {
+  //   return this.http.post(`${default_url}/approve?userId=${userId}&bikeId=${bikeId}`, bike, {
+  //     headers: this.createAuthorizationHeader()
+  //   })
+  // }
 
   createAuthorizationHeader(): HttpHeaders{
     let authHeaders: HttpHeaders = new HttpHeaders()

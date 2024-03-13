@@ -9,9 +9,10 @@ import { Bike } from 'src/app/model/Bike';
   styleUrls: ['./my-bookings.component.css'],
 })
 export class MyBookingsComponent implements OnInit {
-  userId = this.authService.getUser().id;
-  bookedBikes: Bike[] = []
-  bookedBikesAvailable: boolean = false
+  userId: string = '';
+  bookedBikes: any[] = [];
+  isLoading: boolean = false;
+  isBookedBikesAvailable: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -19,33 +20,39 @@ export class MyBookingsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log("bikeeee", this.getMyBookings())
-      this.customerService.getAllBikes().subscribe({
-        next: (res: any) => {
-          if(res.success) {
-            res.result.map((item: any) => {
-              if(item.booking) {
-                this.bookedBikesAvailable = true
-                this.bookedBikes.push(item)
-                console.log("boolean",this.bookedBikesAvailable)
-
-                console.log("my bikes", this.bookedBikes)
-              }else {
-                this.bookedBikesAvailable = false
-              }
-            })
-          }
-        },
-        error: (err) => {
-          console.log("Error: ",err.error.error)
+    this.userId = this.authService.getUser().id;
+    this.isLoading = true;
+    this.customerService.getAllBikes().subscribe({
+      next: (res: any) => {
+        if (res.success) {
+          const data = res.result;
+          this.bookedBikes = data
+            .filter((item: any) =>
+              item.booking.some(
+                (bookingItem: any) => bookingItem.requestId === this.userId
+              )
+            )
+            .map((item: any) => {
+              const bookingData = item.booking.find(
+                (bookingItem: any) => bookingItem.requestId === this.userId
+              );
+              return {
+                bike_brand: item.bike_brand,
+                bike_name: item.bike_name,
+                startTime: bookingData.startTime,
+                endTime: bookingData.endTime,
+                status: bookingData.status,
+              };
+            });
+          setTimeout(() => {
+            this.isLoading = false;
+            this.isBookedBikesAvailable = this.bookedBikes.length > 0;
+          }, 1000);
         }
-      })
-  }
-
-  getMyBookings() {
-    const bikeJson = localStorage.getItem("bookedBikes")
-    if(bikeJson) {
-      return  JSON.parse(bikeJson)
-    }
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 }

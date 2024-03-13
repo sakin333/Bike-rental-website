@@ -17,24 +17,6 @@ export class AppComponent implements OnInit {
   isUserPresent: boolean = false;
 
   ngOnInit(): void {
-    console.log('oninit called');
-    // this.router.events.subscribe((event) => {
-    //   if(event instanceof NavigationEnd) {
-    //     this.checkForUser()
-    //     this.isAdminLoggedIn = this.authService.isAdmin()
-    //     this.isCustomerLoggedIn = this.authService.isCustomer()
-
-    //     if(this.isUserPresent) {
-    //       if(this.isAdminLoggedIn) {
-    //         this.router.navigateByUrl('/admin/dashboard')
-    //       }else if(this.isCustomerLoggedIn) {
-    //         this.router.navigateByUrl('/customer/dashboard')
-    //       }
-    //     }else {
-    //       this.router.navigateByUrl('/login')
-    //     }
-    //   }
-    // })
     this.checkForUser();
     this.isAdminLoggedIn = this.authService.isAdmin();
     this.isCustomerLoggedIn = this.authService.isCustomer();

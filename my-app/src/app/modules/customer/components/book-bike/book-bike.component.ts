@@ -17,6 +17,7 @@ export class BookBikeComponent implements OnInit {
   bikeID: string = this.activatedRoute.snapshot.params['id'];
   bikeToBeBooked: Bike | undefined;
   bookingForm!: FormGroup;
+  bookings: any = []
 
   constructor(
     private customerService: CustomerService,
@@ -27,7 +28,6 @@ export class BookBikeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('hereeeeeeeeeeeeeee',this.userId, this.username)
     this.filterBike();
     this.bookingForm = new FormGroup({
       name: new FormControl(this.username, Validators.required),
@@ -67,7 +67,6 @@ export class BookBikeComponent implements OnInit {
         this.bikeToBeBooked = res.result.find(
           (element: any) => element._id === this.bikeID
         );
-        console.log('from cust', this.bikeToBeBooked);
       },
     });
   }
@@ -77,11 +76,11 @@ export class BookBikeComponent implements OnInit {
     let bookingData = {
       startTime: this.bookingForm.get('dateFrom')?.value,
       endTime: this.bookingForm.get('dateTo')?.value,
+      name: this.bookingForm.get('name')?.value
     }
     this.customerService.bookBikes(this.userId, this.bikeID, bookingData).subscribe(({
       next: (res: any) => {
         if(res.success) {
-          console.log("hereeeeeeeee",res)
           localStorage.setItem("bookedBikes", JSON.stringify(res.data))
           this.snackbar.openSnackBar(res.message, "Close", "success-snackbar")
           this.router.navigateByUrl('/customer/dashboard')

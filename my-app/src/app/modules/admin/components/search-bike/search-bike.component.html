@@ -1,0 +1,66 @@
+<div class="main-container">
+  <mat-card class="search-form-container">
+    <mat-card-title class="search-form-title"> Search bike </mat-card-title>
+    <form [formGroup]="searchForm" (ngSubmit)="onSearchBike()">
+        <div class="input-container">
+            <mat-form-field>
+              <mat-label>Bike Brand</mat-label>
+              <mat-select formControlName="bike_brand" required>
+                <mat-option *ngFor="let item of bikeBrands" value="{{ item }}">{{
+                  item
+                }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+      
+            <mat-form-field>
+              <mat-label>Bike Name</mat-label>
+              <input matInput type="text" formControlName="bike_name" required />
+            </mat-form-field>
+      
+            <mat-form-field>
+              <mat-label>Model Year</mat-label>
+              <mat-select formControlName="model_year" required>
+                <mat-option *ngFor="let item of modelYears" value="{{ item }}">{{
+                  item
+                }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+      
+            <mat-form-field>
+              <mat-label>Color</mat-label>
+              <mat-select formControlName="color" required>
+                <mat-option *ngFor="let item of colors" value="{{ item }}">{{
+                  item
+                }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+      
+            <mat-form-field>
+              <mat-label>Price</mat-label>
+              <input matInput type="number" formControlName="price" required />
+            </mat-form-field>  
+        </div>
+
+      <button mat-raised-button type="submit" color="primary">Search</button>
+    </form>
+  </mat-card>
+
+  <div class="card-container">
+    <mat-card *ngFor="let bike of allBikes" class="bike-card-container">
+      <img mat-card-image src="{{ bike.image }}" alt="{{ bike.name }}" />
+      <mat-card-content>
+        <h2>{{ bike.bike_brand }} {{ bike.bike_name }}</h2>
+        <p>{{ bike.description }}</p>
+        <div class="details">
+          <p><strong>Price:</strong> Rs.{{ bike.price }}/hr</p>
+          <p><strong>Color:</strong> {{ bike.color }}</p>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-stroked-button color="primary" routerLink="/admin/bike/{{bike._id}}">Update</button>
+        <button mat-stroked-button color="warn">Delete</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+</div>

@@ -41,21 +41,6 @@ app.post("/signup", async (req, res) => {
   }
 });
 
-// app.post("/login", async (req, res) => {
-//   if (req.body.email && req.body.password) {
-//     let data = await User.findOne(req.body).select("-password");
-//     if (data) {
-//       res.status(200).json({ success: true, result: data });
-//     } else {
-//       res
-//         .status(400)
-//         .json({ success: false, error: "Enter Valid Information" });
-//     }
-//   } else {
-//     res.status(400).json({ success: false, error: "Enter all required fields" });
-//   }
-// });
-
 app.post("/login", async (req, res) => {
   if (req.body.email && req.body.password) {
     let data = await User.findOne(req.body).select("-password");
@@ -81,6 +66,21 @@ app.post("/login", async (req, res) => {
       .status(400)
       .json({ success: false, error: "Enter all required fields" });
   }
+});
+
+app.get("/users", verifyToken, async (req, res) => {
+  jwt.verify(req.token, secretKey, async (error, authData) => {
+    if (error) {
+      res.json({ error: "Invalid token" });
+    } else {
+      let data = await User.find();
+      if (data) {
+        res.status(200).json({ success: true, result: data, authData });
+      } else {
+        res.status(400).json({ success: false, error: "No Users found" });
+      }
+    }
+  });
 });
 
 app.post("/addBike", verifyToken, async (req, res) => {
@@ -236,6 +236,7 @@ app.post("/booking", verifyToken, async (req, res) => {
                   {
                     $push: {
                       booking: {
+                        name: req.body.name,
                         startTime: startTime,
                         endTime: endTime,
                         accepted: false,
@@ -243,18 +244,17 @@ app.post("/booking", verifyToken, async (req, res) => {
                         requestId: req.query.userId,
                       },
                     },
-                  }
+                  },
+                  { new: true }
                 );
-                let result = book.toObject()
-                // console.log("here",result)
-                res
-                  .status(200)
-                  .json({
-                    success: true,
-                    message: "Successfully sent request",
-                    data: result,
-                    authData,
-                  });
+                book = book.toObject();
+                console.log("here", book);
+                res.status(200).json({
+                  success: true,
+                  message: "Successfully sent request",
+                  data: book,
+                  authData,
+                });
               }
             } else {
               res.status(400).json({ error: "Please provide booking time" });
@@ -267,6 +267,124 @@ app.post("/booking", verifyToken, async (req, res) => {
         }
       } else {
         res.status(400).json({ error: "Vehcile and bike id required" });
+      }
+    }
+  });
+});
+
+app.post("/approve", verifyToken, async (req, res) => {
+  jwt.verify(req.token, secretKey, async (error, authData) => {
+    if (error) {
+      res.json({ error: "Invalid token" });
+    } else {
+      if (req.query.userId && req.query.bikeId) {
+        let userData = await User.findOne({ _id: req.query.userId });
+        if (userData) {
+          let bikeData = await Bike.findOne({ _id: req.query.bikeId });
+          if (bikeData) {
+            let result = await Bike.findOneAndUpdate(
+              { _id: req.query.bikeId },
+              {
+                $set: {
+                  booking: {
+                    name: req.body.name,
+                    startTime: req.body.startTime,
+                    endTime: req.body.endTime,
+                    accepted: true,
+                    status: "Approved",
+                    requestId: req.query.userId,
+                  },
+                },
+              },
+              { new: true }
+            );
+            result = result.toObject();
+            res.status(200).json({ success: true, result: result, authData });
+          } else {
+            res.json({ error: "Invalid bike" });
+          }
+        } else {
+          res.json({ error: "Invalid user" });
+        }
+      } else {
+        res.json({ error: "User id and bike id required" });
+      }
+    }
+  });
+});
+
+app.post("/reject", verifyToken, async (req, res) => {
+  jwt.verify(req.token, secretKey, async (error, authData) => {
+    if (error) {
+      res.json({ error: "Invalid token" });
+    } else {
+      if (req.query.userId && req.query.bikeId) {
+        let userData = await User.findOne({ _id: req.query.userId });
+        if (userData) {
+          let bikeData = await Bike.findOne({ _id: req.query.bikeId });
+          if (bikeData) {
+            let result = await Bike.findOneAndUpdate(
+              { _id: req.query.bikeId },
+              {
+                $set: {
+                  booking: {
+                    name: req.body.name,
+                    startTime: req.body.startTime,
+                    endTime: req.body.endTime,
+                    accepted: false,
+                    status: "Not Approved",
+                    requestId: req.query.userId,
+                  },
+                },
+              },
+              { new: true }
+            );
+            result = result.toObject();
+            res.status(200).json({ success: true, result: result, authData });
+          } else {
+            res.json({ error: "Invalid bike" });
+          }
+        } else {
+          res.json({ error: "Invalid user" });
+        }
+      } else {
+        res.json({ error: "User and bike id required" });
+      }
+    }
+  });
+});
+
+app.post("/admin/booking", verifyToken, async (req, res) => {
+  jwt.verify(req.token, secretKey, async (error, authData) => {
+    if (error) {
+      res.json({ error: "Invalid token" });
+    } else {
+      if (req.query.bookingId && req.query.status) {
+        let value = req.query.status === "Accepted" ? true : false
+        let result = await Bike.findOneAndUpdate(
+          { _id: req.query.bookingId },
+          {
+            $set: {
+              booking: {
+                name: req.body.name,
+                startTime: req.body.startTime,
+                endTime: req.body.endTime,
+                accepted: value,
+                status: req.query.status,
+                requestId: req.query.userId,
+              },
+            },
+          },
+          { new: true }
+        );
+        if (result) {
+          result = result.toObject();
+          res.status(200).json({ success: true, result: result, authData });
+        } else {
+          res.status(404).json({ error: "Booking not found" });
+        }
+      } else {
+        res.json({ error: "Invalid booking id and status" })
       }
     }
   });

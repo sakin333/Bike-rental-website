@@ -49,5 +49,13 @@ export class AuthService {
   logout() {
     localStorage.removeItem("token")
     localStorage.removeItem("user")
+    localStorage.removeItem("bookedBikes")
+  }
+
+  getMyBookings() {
+    const bikeJson = localStorage.getItem("bookedBikes")
+    if(bikeJson) {
+      return  JSON.parse(bikeJson)
+    }
   }
  }

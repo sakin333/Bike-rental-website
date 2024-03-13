@@ -7,13 +7,14 @@ const bikeSchema = new mongoose.Schema({
   price: Number,
   image: String,
   description: String,
-  booking: {
+  booking: [{
+    name: String,
     startTime: String,
     endTime: String,
     accepted: Boolean,
     status: String,
     requestId: String,
-  },
+  }],
 });
 const bikeModel = mongoose.model("bikes", bikeSchema);
 module.exports = bikeModel;
