@@ -55,3 +55,7 @@ mat-card-actions {
   align-items: center;
   gap: 8px;
 }
+
+.no-bike-text {
+  text-align: center;
+}

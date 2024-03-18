@@ -92,7 +92,7 @@ app.post("/addBike", verifyToken, async (req, res) => {
         req.body.bike_name &&
         req.body.bike_brand &&
         req.body.model_year &&
-        req.body.color &&
+        req.body.type &&
         req.body.price &&
         req.body.image
       ) {
@@ -100,7 +100,7 @@ app.post("/addBike", verifyToken, async (req, res) => {
           bike_brand: req.body.bike_brand,
           bike_name: req.body.bike_name,
           model_year: req.body.model_year,
-          color: req.body.color,
+          type: req.body.type,
           price: req.body.price,
           image: req.body.image,
           description: req.body.description,
@@ -143,7 +143,7 @@ app.post("/updateBike", verifyToken, async (req, res) => {
             req.body.bike_name &&
             req.body.bike_brand &&
             req.body.model_year &&
-            req.body.color &&
+            req.body.type &&
             req.body.price &&
             req.body.image &&
             req.body.description
@@ -155,7 +155,7 @@ app.post("/updateBike", verifyToken, async (req, res) => {
                   bike_brand: req.body.bike_brand,
                   bike_name: req.body.bike_name,
                   model_year: req.body.model_year,
-                  color: req.body.color,
+                  type: req.body.type,
                   price: req.body.price,
                   image: req.body.image,
                   description: req.body.description,
@@ -362,7 +362,7 @@ app.post("/admin/booking", verifyToken, async (req, res) => {
       if (req.query.bookingId && req.query.status) {
         let value = req.query.status === "Accepted" ? true : false
         let result = await Bike.findOneAndUpdate(
-          { _id: req.query.bookingId },
+          { "booking._id": req.query.bookingId },
           {
             $set: {
               booking: {

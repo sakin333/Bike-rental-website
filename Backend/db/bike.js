@@ -3,7 +3,7 @@ const bikeSchema = new mongoose.Schema({
   bike_brand: String,
   bike_name: String,
   model_year: String,
-  color: String,
+  type: String,
   price: Number,
   image: String,
   description: String,

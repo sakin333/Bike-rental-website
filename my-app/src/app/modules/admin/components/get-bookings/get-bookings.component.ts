@@ -11,6 +11,7 @@ import { User } from 'src/app/model/User';
 export class GetBookingsComponent implements OnInit {
   bookedBikes: any[] = [];
   isLoading: boolean = false;
+  isBookedBikesAvailable: boolean = false;
   users: any = []
   userId: string = ''
 
@@ -26,6 +27,7 @@ export class GetBookingsComponent implements OnInit {
   }
 
   changeBookingStatus(bookingId: string, status: string) {
+    console.log(this.bookedBikes)
     console.log(bookingId, status)
   }
 
@@ -54,7 +56,10 @@ export class GetBookingsComponent implements OnInit {
                     })
                   })
                 })
-                this.isLoading = false
+                setTimeout(() => {
+                  this.isLoading = false
+                  this.isBookedBikesAvailable = this.bookedBikes.length > 0
+                }, 2000)
               }
             },
             error: (err) => {

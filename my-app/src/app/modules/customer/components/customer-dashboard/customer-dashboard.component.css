@@ -9,6 +9,10 @@ mat-card {
   padding: 8px;
 }
 
+mat-card-content {
+  margin-top: 16px;
+}
+
 img {
   max-width: calc(350px - 16px);
   max-height: 200px;

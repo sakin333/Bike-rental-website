@@ -1,15 +1,17 @@
-<mat-toolbar color="primary" class="navbar" *ngIf="!isAdminLoggedIn && !isCustomerLoggedIn">
+<mat-toolbar class="navbar" *ngIf="!isAdminLoggedIn && !isCustomerLoggedIn">
     <div class="navbar-title-container">
       <a href="#" class="navbar-title">Bike-Rent</a>
     </div>
   
     <div class="button-container">
+      <a routerLink="/home" class="home-button">Home</a>
+      <a routerLink="/about" class="about-button">About</a>
       <a mat-flat-button routerLink="/login" class="login-button">Login</a>
       <a mat-flat-button color="warn" routerLink="/register" class="signup-button">Signup</a>
     </div>
 </mat-toolbar>
 
-<mat-toolbar *ngIf="isAdminLoggedIn" color="primary" class="navbar">
+<mat-toolbar *ngIf="isAdminLoggedIn" class="navbar">
   <div class="navbar-title-container">
     <a href="#" class="navbar-title">Admin</a>
   </div>
@@ -23,9 +25,9 @@
   </div>
 </mat-toolbar>
 
-<mat-toolbar *ngIf="isCustomerLoggedIn" color="primary" class="navbar">
+<mat-toolbar *ngIf="isCustomerLoggedIn" class="navbar">
   <div class="navbar-title-container">
-    <a href="#" class="navbar-title">Customer</a>
+    <a href="#" class="navbar-title">Bike Rent</a>
   </div>
 
   <div class="button-container">
@@ -35,8 +37,6 @@
   </div>
 </mat-toolbar>
   
-
-
 <router-outlet></router-outlet>
 
 

@@ -11,27 +11,6 @@ import { SnackbarService } from 'src/app/snackbar/snackbar.service';
 export class AdminDashboardComponent implements OnInit {
   allBikes: any;
 
-  bikes = [
-    {
-      brand: 'Brand1',
-      name: 'Model1',
-      image:
-        'https://imgd.aeplcdn.com/664x374/n/cw/ec/115871/mt-15-v2-right-front-three-quarter-3.jpeg?isig=0&q=80',
-      price: 1000,
-      color: 'Red',
-      description: 'Description for Model1',
-    },
-    {
-      brand: 'Brand2',
-      name: 'Model2',
-      image:
-        'https://imgd.aeplcdn.com/664x374/n/cw/ec/115871/mt-15-v2-right-front-three-quarter-3.jpeg?isig=0&q=80',
-      price: 1200,
-      color: 'Blue',
-      description: 'Description for Model2',
-    },
-  ];
-
   constructor(
     private adminService: AdminService,
     private snackbar: SnackbarService

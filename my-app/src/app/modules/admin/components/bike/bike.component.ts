@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AdminService } from '../../services/admin.service';
 import { Router } from '@angular/router';
-import { bikeBrands, bikeColors, modelYears } from 'src/app/constants/constant';
+import { bikeBrands, bikeTypes, modelYears } from 'src/app/constants/constant';
 
 @Component({
   selector: 'app-bike',
@@ -15,7 +15,7 @@ export class BikeComponent {
   bikeForm!: FormGroup
   bikeBrands = bikeBrands
   modelYears = modelYears
-  colors = bikeColors
+  types = bikeTypes
 
   constructor(private snackbar: MatSnackBar, private adminService: AdminService, private router: Router) {}
 
@@ -24,7 +24,7 @@ export class BikeComponent {
       bike_brand: new FormControl(null, Validators.required),
       bike_name: new FormControl(null, Validators.required),
       model_year: new FormControl(null, Validators.required),
-      color: new FormControl(null, Validators.required),
+      type: new FormControl(null, Validators.required),
       price: new FormControl(null, Validators.required),
       image: new FormControl(null, Validators.required),
       description: new FormControl(null, Validators.required)
@@ -51,7 +51,7 @@ export class BikeComponent {
         bike_brand: this.bikeForm.value['bike_brand'],
         bike_name: this.bikeForm.value['bike_name'].toUpperCase(),
         model_year: this.bikeForm.value['model_year'],
-        color: this.bikeForm.value['color'],
+        type: this.bikeForm.value['type'],
         price: this.bikeForm.value['price'],
         image: this.bikeForm.value['image'],
         description: this.bikeForm.value['description'],

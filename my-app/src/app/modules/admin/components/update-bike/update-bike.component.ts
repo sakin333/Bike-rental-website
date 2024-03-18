@@ -3,7 +3,7 @@ import { AdminService } from '../../services/admin.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Bike } from 'src/app/model/Bike';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { bikeBrands, bikeColors, modelYears } from 'src/app/constants/constant';
+import { bikeBrands, bikeTypes, modelYears } from 'src/app/constants/constant';
 import { SnackbarService } from 'src/app/snackbar/snackbar.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class UpdateBikeComponent implements OnInit {
   updateForm!: FormGroup;
   bikeBrands = bikeBrands;
   modelYears = modelYears;
-  colors = bikeColors;
+  types = bikeTypes;
 
   constructor(
     private adminService: AdminService,
@@ -32,7 +32,7 @@ export class UpdateBikeComponent implements OnInit {
       bike_brand: new FormControl(null, Validators.required),
       bike_name: new FormControl(null, Validators.required),
       model_year: new FormControl(null, Validators.required),
-      color: new FormControl(null, Validators.required),
+      type: new FormControl(null, Validators.required),
       price: new FormControl(null, Validators.required),
       image: new FormControl(null, Validators.required),
       description: new FormControl(null, Validators.required),
@@ -56,7 +56,7 @@ export class UpdateBikeComponent implements OnInit {
       this.updateForm.patchValue({
         bike_brand: this.bikeToBeUpdated.bike_brand,
         bike_name: this.bikeToBeUpdated.bike_name,
-        color: this.bikeToBeUpdated.color,
+        type: this.bikeToBeUpdated.type,
         description: this.bikeToBeUpdated.description,
         image: this.bikeToBeUpdated.image,
         model_year: this.bikeToBeUpdated.model_year,
@@ -72,7 +72,7 @@ export class UpdateBikeComponent implements OnInit {
         bike_brand: this.updateForm.value['bike_brand'],
         bike_name: this.updateForm.value['bike_name'].toUpperCase(),
         model_year: this.updateForm.value['model_year'],
-        color: this.updateForm.value['color'],
+        type: this.updateForm.value['type'],
         price: this.updateForm.value['price'],
         image: this.updateForm.value['image'],
         description: this.updateForm.value['description'],

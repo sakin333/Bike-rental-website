@@ -5,19 +5,28 @@
 
 .navbar-title {
     font-size: 1em;
-    color: #fff;
+    color: #333;
 }
   
 .button-container {
     display: flex;
     align-items: center;
 }
-  
-.login-button {
-    margin-right: 10px;
+
+.button-container a {
+    font-size: 16px;
 }
-  
+
+.home-button,
+.about-button {
+    color: #333;
+}
+ 
+.home-button,
+.about-button,
+.login-button,
 .signup-button {
-    margin-left: 10px;
+    margin-right: 32px;
 }
+  
   

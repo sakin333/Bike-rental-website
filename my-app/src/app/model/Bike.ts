@@ -9,7 +9,7 @@ export class Bike {
         public bike_brand: string,
         public bike_name: string,
         public model_year: string,
-        public color: string,
+        public type: string,
         public price: number,
         public image: string,
         public description: string,

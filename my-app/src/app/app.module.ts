@@ -11,6 +11,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { HomeComponent } from './pages/home/home.component';
+import { AboutComponent } from './pages/about/about.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,9 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
     LoginComponent,
     SignupComponent,
     DashboardComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    HomeComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +31,8 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
     BrowserAnimationsModule,
     MaterialModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

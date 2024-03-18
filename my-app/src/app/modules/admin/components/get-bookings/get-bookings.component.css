@@ -43,3 +43,8 @@ td.mat-cell.pending {
 .button-cell {
   text-align: center;
 }
+
+.no-bikes-text {
+  text-align: center;
+  margin-top: 16px;
+}
