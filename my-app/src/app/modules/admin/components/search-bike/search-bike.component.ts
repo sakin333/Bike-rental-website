@@ -10,13 +10,15 @@ import { SnackbarService } from 'src/app/snackbar/snackbar.service';
   styleUrls: ['./search-bike.component.css'],
 })
 export class SearchBikeComponent {
-  searchForm!: FormGroup;
-  bikeBrands = bikeBrands;
-  modelYears = modelYears;
-  types = bikeTypes;
-  allBikes: any = [];
-  searchedBikeAvailable: boolean = false;
-  searchClicked: boolean = false;
+  public searchForm!: FormGroup;
+  public bikeBrands = bikeBrands;
+  public modelYears = modelYears;
+  public types = bikeTypes;
+  public allBikes: any = [];
+  public searchedBikeAvailable: boolean = false;
+  public searchClicked: boolean = false;
+  public minValue: number = 100;
+  public maxValue: number = 800;
 
   constructor(
     private adminService: AdminService,
@@ -33,7 +35,7 @@ export class SearchBikeComponent {
     });
   }
 
-  onSearchBike() {
+  public onSearchBike(): void {
     this.searchClicked = true;
     this.adminService.getAllBikes().subscribe({
       next: (res: any) => {
@@ -41,22 +43,87 @@ export class SearchBikeComponent {
         const { bike_brand, bike_name, model_year, type, price } =
           this.searchForm.value;
 
-        // this.allBikes = data.filter((item: any) =>
-        //   (item.bike_name.toLowerCase().includes(bike_name.toLowerCase())) && (item.bike_brand === bike_brand)
-        // );
+        this.allBikes = data.filter((item: any) => {
+          if (bike_brand && item.bike_brand !== bike_brand) {
+            return false;
+          }
 
-        this.allBikes = data.filter(
-          (item: any) =>
-            (bike_name && item.bike_name.toLowerCase().includes(bike_name.toLowerCase())) &&
-            (bike_brand && item.bike_brand === bike_brand)
-        );
+          if (
+            bike_name &&
+            !item.bike_name.toLowerCase().includes(bike_name.toLowerCase())
+          ) {
+            return false;
+          }
+
+          if (model_year && item.model_year !== model_year) {
+            return false;
+          }
+
+          if (type && item.type !== type) {
+            return false;
+          }
+
+          if (
+            price &&
+            !(item.price >= this.minValue) &&
+            !(item.price >= this.maxValue)
+          ) {
+            return false;
+          }
+
+          return true;
+        });
 
         this.searchedBikeAvailable = this.allBikes.length > 0;
-
-        console.log('all bikes', this.allBikes);
       },
       error: (err) => {
         this.snackbar.openSnackBar(err.error, 'Close', 'error-snackbar');
+      },
+    });
+  }
+
+  public deleteBike(id: string): void {
+    this.adminService.deleteBike(id).subscribe({
+      next: (res: any) => {
+        if (res.success) {
+          this.getAllBikes();
+          this.snackbar.openSnackBar(res.message, 'Close', 'success-snackbar');
+        } else {
+          this.snackbar.openSnackBar(res.error, 'Close', 'error-snackbar');
+        }
+      },
+      error: (err) => {
+        this.snackbar.openSnackBar(err.error.error, 'Close', 'error-snackbar');
+      },
+    });
+  }
+
+  public getAllBikes(): void {
+    this.adminService.getAllBikes().subscribe({
+      next: (res: any) => {
+        if (res.success) {
+          this.allBikes = res.result;
+        } else {
+          this.snackbar.openSnackBar(res.error, 'Close', 'error-snackbar');
+        }
+      },
+      error: (err) => {
+        this.snackbar.openSnackBar(err.error.error, 'Close', 'error-snackbar');
+      },
+    });
+  }
+
+  public deleteBikeFromSearch(id: string): void {
+    this.adminService.deleteBike(id).subscribe({
+      next: (res: any) => {
+        if (res.success) {
+          this.snackbar.openSnackBar(res.message, 'Close', 'success-snackbar');
+        } else {
+          this.snackbar.openSnackBar(res.error, 'Close', 'error-snackbar');
+        }
+      },
+      error: (err) => {
+        this.snackbar.openSnackBar(err.error.error, 'Close', 'error-snackbar');
       },
     });
   }

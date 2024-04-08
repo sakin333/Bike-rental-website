@@ -1,61 +1,64 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { default_url } from 'src/app/constants/constant';
 import { User } from 'src/app/model/User';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  signUp(user: User) {
-    return this.http.post(`${default_url}/signup`, user)
+  public signUp(user: User): Observable<any> {
+    return this.http.post(`${default_url}/signup`, user);
   }
 
-  logIn(credentials: { email: string, password: string}) {
-    return this.http.post(`${default_url}/login`, credentials)
+  public logIn(credentials: {
+    email: string;
+    password: string;
+  }): Observable<any> {
+    return this.http.post(`${default_url}/login`, credentials);
   }
 
-  getToken() {
-    return localStorage.getItem("token")
+  public getToken(): string | null {
+    return localStorage.getItem('token');
   }
 
-  getUser() {
-    const userJson = localStorage.getItem("user")
+  public getUser(): User | null {
+    const userJson = localStorage.getItem('user');
 
-    if(userJson !== null) {
-      return JSON.parse(userJson)
-    }else {
-      return null
+    if (userJson !== null) {
+      return JSON.parse(userJson);
+    } else {
+      return null;
     }
   }
 
-  isAdmin() {
-    const user = this.getUser()
-    return user.role === "ADMIN"
+  public isAdmin(): boolean {
+    const user = this.getUser();
+    return user?.role === 'ADMIN';
   }
 
-  isCustomer() {
-    const user = this.getUser()
-    return user.role === "CUSTOMER"
+  public isCustomer(): boolean {
+    const user = this.getUser();
+    return user?.role === 'CUSTOMER';
   }
 
-  isLoggedIn() {
-    return this.isAdmin() || this.isCustomer()
+  public isLoggedIn(): boolean {
+    return this.isAdmin() || this.isCustomer();
   }
 
-  logout() {
-    localStorage.removeItem("token")
-    localStorage.removeItem("user")
-    localStorage.removeItem("bookedBikes")
+  public logout(): void {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    localStorage.removeItem('bookedBikes');
   }
 
-  getMyBookings() {
-    const bikeJson = localStorage.getItem("bookedBikes")
-    if(bikeJson) {
-      return  JSON.parse(bikeJson)
+  public getMyBookings(): any {
+    const bikeJson = localStorage.getItem('bookedBikes');
+    if (bikeJson) {
+      return JSON.parse(bikeJson);
     }
   }
- }
+}

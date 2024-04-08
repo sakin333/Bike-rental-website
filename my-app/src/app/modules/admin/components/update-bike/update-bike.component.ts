@@ -12,12 +12,12 @@ import { SnackbarService } from 'src/app/snackbar/snackbar.service';
   styleUrls: ['./update-bike.component.css'],
 })
 export class UpdateBikeComponent implements OnInit {
-  bikeID: string = this.activatedRoute.snapshot.params['id'];
-  bikeToBeUpdated: Bike | undefined;
-  updateForm!: FormGroup;
-  bikeBrands = bikeBrands;
-  modelYears = modelYears;
-  types = bikeTypes;
+  public bikeID: string = this.activatedRoute.snapshot.params['id'];
+  public bikeToBeUpdated: Bike | undefined;
+  public updateForm!: FormGroup;
+  public bikeBrands = bikeBrands;
+  public modelYears = modelYears;
+  public types = bikeTypes;
 
   constructor(
     private adminService: AdminService,
@@ -39,7 +39,7 @@ export class UpdateBikeComponent implements OnInit {
     });
   }
 
-  filterBike() {
+  public filterBike(): void {
     this.adminService.getAllBikes().subscribe({
       next: (res: any) => {
         this.bikeToBeUpdated = res.result.find(
@@ -51,7 +51,7 @@ export class UpdateBikeComponent implements OnInit {
     });
   }
 
-  patchUpdateFormValue() {
+  private patchUpdateFormValue(): void {
     if (this.bikeToBeUpdated) {
       this.updateForm.patchValue({
         bike_brand: this.bikeToBeUpdated.bike_brand,
@@ -65,8 +65,7 @@ export class UpdateBikeComponent implements OnInit {
     }
   }
 
-  onUpdateBike() {
-    console.log('update');
+  public onUpdateBike(): void {
     if (this.updateForm.valid) {
       const data = {
         bike_brand: this.updateForm.value['bike_brand'],

@@ -6,60 +6,63 @@ import { default_url } from 'src/app/constants/constant';
 import { Bike } from 'src/app/model/Bike';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AdminService {
+  constructor(private http: HttpClient, private authServcie: AuthService) {}
 
-  constructor(private http: HttpClient, private authServcie: AuthService) { }
-
-  getUsers() {
+  public getUsers(): Observable<any> {
     return this.http.get(`${default_url}/users`, {
-      headers: this.createAuthorizationHeader()
-    })
+      headers: this.createAuthorizationHeader(),
+    });
   }
 
-  addBike(bike: Bike) {
+  public addBike(bike: Bike): Observable<any> {
     return this.http.post(`${default_url}/addBike`, bike, {
-      headers: this.createAuthorizationHeader()
-    })
+      headers: this.createAuthorizationHeader(),
+    });
   }
 
-  getAllBikes() {
+  public getAllBikes(): Observable<any> {
     return this.http.get(`${default_url}/getAllBikes`, {
-      headers: this.createAuthorizationHeader()
-    })
+      headers: this.createAuthorizationHeader(),
+    });
   }
 
-  updateBike(id: string | undefined, bike: Bike | undefined) {
+  public updateBike(
+    id: string | undefined,
+    bike: Bike | undefined
+  ): Observable<any> {
     return this.http.post(`${default_url}/updateBike?id=${id}`, bike, {
-      headers: this.createAuthorizationHeader()
-    })
+      headers: this.createAuthorizationHeader(),
+    });
   }
 
-  deleteBike(id: string | undefined) {
+  public deleteBike(id: string | undefined): Observable<any> {
     return this.http.delete(`${default_url}/deleteBike?id=${id}`, {
-      headers: this.createAuthorizationHeader()
-    })
+      headers: this.createAuthorizationHeader(),
+    });
   }
 
-  changeBookingStatus(bookingId: string, status: string) {
-    return this.http.post(`${default_url}/admin/booking?bookingId=${bookingId}&status=${status}`, {
-      headers: this.createAuthorizationHeader()
-    })
+  public changeBookingStatus(
+    bookingId: string,
+    status: string,
+    data: any
+  ): Observable<any> {
+    return this.http.post(
+      `${default_url}/admin/booking?bookingId=${bookingId}&status=${status}`,
+      data,
+      {
+        headers: this.createAuthorizationHeader(),
+      }
+    );
   }
 
-  // approveBooking(userId: string, bikeId: string, bike: Bike) {
-  //   return this.http.post(`${default_url}/approve?userId=${userId}&bikeId=${bikeId}`, bike, {
-  //     headers: this.createAuthorizationHeader()
-  //   })
-  // }
-
-  createAuthorizationHeader(): HttpHeaders{
-    let authHeaders: HttpHeaders = new HttpHeaders()
+  public createAuthorizationHeader(): HttpHeaders {
+    let authHeaders: HttpHeaders = new HttpHeaders();
     return authHeaders.set(
       'Authorization',
       'Bearer ' + this.authServcie.getToken()
-    )
+    );
   }
-
 }

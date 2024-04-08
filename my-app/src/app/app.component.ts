@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth/services/auth.service';
 import { NavigationEnd, Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { FeedbackComponent } from './modules/customer/components/feedback/feedback.component';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +12,17 @@ import { NavigationEnd, Router } from '@angular/router';
 export class AppComponent implements OnInit {
   title = 'my-app';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private dialog: MatDialog
+  ) {}
 
-  isAdminLoggedIn: boolean = false;
-  isCustomerLoggedIn: boolean = false;
-  isUserPresent: boolean = false;
+  public isAdminLoggedIn: boolean = false;
+  public isCustomerLoggedIn: boolean = false;
+  public isUserPresent: boolean = false;
+  public notificationNumber: number | null = null;
+  public isMenuShown: boolean = false;
 
   ngOnInit(): void {
     this.checkForUser();
@@ -28,7 +36,7 @@ export class AppComponent implements OnInit {
         this.router.navigateByUrl('/customer/dashboard');
       }
     } else {
-      this.router.navigateByUrl('/login');
+      this.router.navigateByUrl('/home');
     }
 
     this.router.events.subscribe((event) => {
@@ -39,15 +47,23 @@ export class AppComponent implements OnInit {
     });
   }
 
-  checkForUser() {
+  private checkForUser(): void {
     const user = this.authService.getUser();
     this.isUserPresent = user !== null;
   }
 
-  logout() {
+  public logout(): void {
     this.authService.logout();
     this.isAdminLoggedIn = false;
     this.isCustomerLoggedIn = false;
-    this.router.navigateByUrl('/login');
+    this.router.navigateByUrl('/home');
+  }
+
+  public toggleMenu(): void {
+    this.isMenuShown = !this.isMenuShown;
+  }
+
+  public openFeedbackDialog(): void {
+    this.dialog.open(FeedbackComponent);
   }
 }

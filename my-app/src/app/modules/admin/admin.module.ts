@@ -9,7 +9,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UpdateBikeComponent } from './components/update-bike/update-bike.component';
 import { GetBookingsComponent } from './components/get-bookings/get-bookings.component';
 import { SearchBikeComponent } from './components/search-bike/search-bike.component';
-
+import { BikeDetailsComponent } from './components/bike-details/bike-details.component';
+import { SharedModuleModule } from '../shared-module/shared-module.module';
 
 @NgModule({
   declarations: [
@@ -17,13 +18,15 @@ import { SearchBikeComponent } from './components/search-bike/search-bike.compon
     BikeComponent,
     UpdateBikeComponent,
     GetBookingsComponent,
-    SearchBikeComponent
+    SearchBikeComponent,
+    BikeDetailsComponent,
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     MaterialModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    SharedModuleModule,
+  ],
 })
-export class AdminModule { }
+export class AdminModule {}

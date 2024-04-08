@@ -9,7 +9,7 @@ import { SnackbarService } from 'src/app/snackbar/snackbar.service';
   styleUrls: ['./admin-dashboard.component.css'],
 })
 export class AdminDashboardComponent implements OnInit {
-  allBikes: any;
+  public allBikes: any;
 
   constructor(
     private adminService: AdminService,
@@ -20,12 +20,12 @@ export class AdminDashboardComponent implements OnInit {
     this.getAllBikes();
   }
 
-  getAllBikes() {
+  public getAllBikes(): void {
     this.adminService.getAllBikes().subscribe({
       next: (res: any) => {
-        if(res.success) {
+        if (res.success) {
           this.allBikes = res.result;
-        }else {
+        } else {
           this.snackbar.openSnackBar(res.error, 'Close', 'error-snackbar');
         }
       },
@@ -35,23 +35,19 @@ export class AdminDashboardComponent implements OnInit {
     });
   }
 
-  deleteBike(id: string) {
+  public deleteBike(id: string): void {
     this.adminService.deleteBike(id).subscribe({
       next: (res: any) => {
-        if(res.success) {
-          this.getAllBikes()
+        if (res.success) {
+          this.getAllBikes();
           this.snackbar.openSnackBar(res.message, 'Close', 'success-snackbar');
-        }else {
+        } else {
           this.snackbar.openSnackBar(res.error, 'Close', 'error-snackbar');
         }
       },
       error: (err) => {
         this.snackbar.openSnackBar(err.error.error, 'Close', 'error-snackbar');
-      }
+      },
     });
-  }
-
-  updateBike() {
-    console.log('Update bike');
   }
 }

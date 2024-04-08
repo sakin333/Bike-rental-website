@@ -1,22 +1,24 @@
 .card-container {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 mat-card {
-  width: 350px;
+  width: 330px;
   margin: 16px;
   padding: 8px;
 }
 
 img {
   max-width: calc(350px - 16px);
-  max-height: 200px;
+  height: 180px;
   object-fit: cover;
 }
 
 mat-card-content {
   margin-top: 16px;
+  height: 180px;
 }
 
 .details {
@@ -24,7 +26,7 @@ mat-card-content {
 }
 
 mat-card-actions {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }

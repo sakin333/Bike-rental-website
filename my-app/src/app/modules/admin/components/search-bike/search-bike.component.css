@@ -25,6 +25,11 @@ form div > mat-form-field {
   width: calc(20% - 10px);
 }
 
+mat-card-content {
+  margin-top: 16px;
+  height: 180px;
+}
+
 mat-form-field {
   margin-bottom: 0.5em;
 }
@@ -32,17 +37,18 @@ mat-form-field {
 .card-container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .bike-card-container {
-  width: 350px;
+  width: 330px;
   margin: 16px;
   padding: 8px;
 }
 
 img {
   max-width: calc(350px - 16px);
-  max-height: 200px;
+  height: 180px;
   object-fit: cover;
 }
 

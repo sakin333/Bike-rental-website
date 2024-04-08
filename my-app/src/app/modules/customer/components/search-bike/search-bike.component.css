@@ -1,0 +1,67 @@
+.search-form-title {
+  margin-bottom: 1em;
+}
+
+.search-form-container {
+  width: 1120px;
+  margin: 2em auto;
+  padding: 2em;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.input-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+form div > mat-form-field {
+  width: calc(20% - 10px);
+}
+
+mat-card-content {
+  margin-top: 16px;
+  height: 180px;
+}
+
+mat-form-field {
+  margin-bottom: 0.5em;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.bike-card-container {
+  width: 330px;
+  margin: 16px;
+  padding: 8px;
+}
+
+img {
+  max-width: calc(350px - 16px);
+  height: 180px;
+  object-fit: cover;
+}
+
+.details {
+  margin-top: 16px;
+}
+
+mat-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.no-bike-text {
+  text-align: center;
+}

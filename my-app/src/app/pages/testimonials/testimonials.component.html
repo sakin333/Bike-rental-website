@@ -1,0 +1,37 @@
+<div class="main-container" id="testimonials">
+  <h2>Customers' Testimonials</h2>
+  <div class="testimonial-container">
+    <div *ngFor="let testimonial of testimonials" class="testimonial-card">
+      <mat-card class="testimonial-card-inner">
+        <div class="profile-image-container">
+          <img
+            src="https://images.pexels.com/photos/1040881/pexels-photo-1040881.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            alt=""
+            class="profile-image"
+          />
+        </div>
+        <mat-card-content>
+          <div class="content-wrapper">
+            <div class="improvement">
+              {{ testimonial.improvement | ellipsis : 50 }}
+            </div>
+            <div class="user-info">
+              <span>{{ testimonial.user.username | uppercase }}</span>
+              <span class="email">{{ testimonial.user.email }}</span>
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card-footer>
+          <div class="rating">
+            <mat-icon
+              *ngFor="let icon of starIcons(testimonial.rating)"
+              matTooltip="Rating"
+              >{{ icon }}</mat-icon
+            >
+          </div>
+          <span>{{ testimonial.rating }}/5</span>
+        </mat-card-footer>
+      </mat-card>
+    </div>
+  </div>
+</div>

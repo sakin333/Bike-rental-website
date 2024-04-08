@@ -1,27 +1,42 @@
-.main-container,
-.hero-card,
-.card-header {
+.main-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+  /* background-image: url(../../../assets/gradient.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat; */
+}
+
+.hero-card {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-bottom: 32px;
+  align-items: flex-start;
+  gap: 32px;
+  padding: 40px;
 }
 
 .bike-home-image {
-  width: 40%;
+  width: 100%;
+  max-width: 700px;
   height: auto;
+  margin-left: 32px;
 }
 
 .card-header {
   line-height: 24px;
+  text-align: center;
 }
 
 .card-title {
-  font-size: 48px;
+  font-size: 40px;
+  line-height: 40px;
 }
 
 .card-subtitle {
-  font-size: 16px;
+  font-size: 18px;
+  margin-left: -48px;
 }
 
 footer {
@@ -31,40 +46,63 @@ footer {
 
 footer .container {
   display: flex;
-  align-items: center;
+  flex-direction: row;
   justify-content: space-between;
   max-width: 1100px;
   margin: 0 auto;
 }
 
 .site-title {
-    font-size: 18px;
-    font-weight: bold;
-}
-
-footer p,
-a {
   font-size: 16px;
+  font-weight: bold;
 }
 
 .social-links {
-    display: flex;
-    align-items: center;
-    gap: 16px;
+  display: flex;
+  gap: 16px;
 }
 
+.footer-menu ul {
+  list-style: none;
+  padding: 0;
+}
 
 .footer-menu ul li {
-    margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
-
 .footer-menu ul li:hover {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .footer-menu ul li a {
-    color: #333;
+  color: #333;
+  text-decoration: none;
 }
 
+@media screen and (max-width: 720px) {
+  .main-container {
+    flex-direction: column;
+  }
 
+  .hero-card {
+    align-items: center;
+  }
+
+  .card-title {
+    margin-bottom: 18px;
+  }
+
+  .card-subtitle {
+    margin-left: 0;
+  }
+
+  footer .container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-menu {
+    display: none;
+  }
+}

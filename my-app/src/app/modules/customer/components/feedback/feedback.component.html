@@ -1,0 +1,52 @@
+<mat-card class="feedback-card">
+  <form
+    class="feedback-form"
+    [formGroup]="feedbackForm"
+    (ngSubmit)="onFeedbackSubmit()"
+  >
+    <h4>How was your experience with the bike?</h4>
+    <div class="star-icon-container">
+      <mat-icon
+        class="star-icon"
+        *ngFor="let icon of [].constructor(maxRating); let index = index"
+        (mouseenter)="handleMouseEnter(index)"
+        (click)="rating(index)"
+        [ngClass]="{ checked: selectedStar > index }"
+      >
+        star
+      </mat-icon>
+    </div>
+    <mat-error
+      *ngIf="formSubmitted && feedbackForm.get('rating')?.hasError('required')"
+    >
+      *required
+    </mat-error>
+
+    <h4>How can we improve?</h4>
+    <mat-form-field appearance="outline" class="improve-field">
+      <textarea matInput formControlName="improvement"></textarea>
+      <mat-error
+        *ngIf="
+          formSubmitted && feedbackForm.get('improvement')?.hasError('required')
+        "
+      >
+        *required
+      </mat-error>
+    </mat-form-field>
+
+    <h4>Email</h4>
+    <mat-form-field appearance="outline" class="email-field">
+      <input matInput type="email" formControlName="email" />
+    </mat-form-field>
+
+    <button
+      mat-flat-button
+      type="submit"
+      color="primary"
+      class="feedback-submit-button"
+      [disabled]="feedbackForm.invalid"
+    >
+      Submit
+    </button>
+  </form>
+</mat-card>

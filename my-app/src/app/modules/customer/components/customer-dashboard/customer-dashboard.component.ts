@@ -9,7 +9,7 @@ import { SnackbarService } from 'src/app/snackbar/snackbar.service';
   styleUrls: ['./customer-dashboard.component.css'],
 })
 export class CustomerDashboardComponent {
-  allBikes: Bike[] = [];
+  public allBikes: Bike[] = [];
 
   constructor(
     private customerService: CustomerService,
@@ -18,10 +18,9 @@ export class CustomerDashboardComponent {
 
   ngOnInit(): void {
     this.getAllBikes();
-    console.log('My bikes', this.allBikes);
   }
 
-  getAllBikes() {
+  public getAllBikes(): void {
     this.customerService.getAllBikes().subscribe({
       next: (res: any) => {
         if (res.success) {

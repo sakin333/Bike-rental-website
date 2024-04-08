@@ -10,7 +10,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatDialogModule } from '@angular/material/dialog';
+import {MatSliderModule} from '@angular/material/slider';
 
 const MaterialComponents = [
   MatButtonModule,
@@ -24,7 +27,10 @@ const MaterialComponents = [
   MatDatepickerModule,
   MatNativeDateModule,
   MatTableModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatBadgeModule,
+  MatDialogModule,
+  MatSliderModule
 ];
 
 @NgModule({

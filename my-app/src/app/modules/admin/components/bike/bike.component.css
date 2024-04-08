@@ -22,12 +22,12 @@ form {
 }
 
 form > div {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 form div > mat-form-field {
-    width: calc(50% - 10px);
+  width: calc(50% - 10px);
 }
 
 mat-form-field {

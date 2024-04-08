@@ -9,13 +9,13 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 })
 export class HomeComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
-  userPresent: any;
+  public userPresent: any;
 
   ngOnInit(): void {
     this.userPresent = this.authService.getUser();
   }
 
-  onExploreClicked() {
+  public onExploreClicked(): void {
     if (this.userPresent?.role === 'ADMIN') {
       this.router.navigateByUrl('/admin/dashboard');
     } else if (this.userPresent?.role === 'CUSTOMER') {

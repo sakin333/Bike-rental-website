@@ -1,16 +1,29 @@
 <div class="card-container">
-    <mat-card *ngFor="let bike of allBikes">
-      <img mat-card-image src="{{ bike.image }}" alt="{{ bike.bike_name }}" />
-      <mat-card-content>
-        <h2>{{ bike.bike_brand }} {{ bike.bike_name }}</h2>
-        <p>{{ bike.description }}</p>
-        <div class="details">
-          <p><strong>Price:</strong> Rs.{{ bike.price }}/hr</p>
-          <p><strong>Color:</strong> {{ bike.type }}</p>
-        </div>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-stroked-button color="primary" routerLink="/customer/book/{{bike._id}}">Book</button>
-      </mat-card-actions>
-    </mat-card>
+  <mat-card *ngFor="let bike of allBikes">
+    <img mat-card-image src="{{ bike.image }}" alt="{{ bike.bike_name }}" />
+    <mat-card-content>
+      <h2>{{ bike.bike_brand }} {{ bike.bike_name }}</h2>
+      <p>{{ bike.description | ellipsis }}</p>
+      <div class="details">
+        <p><strong>Price:</strong> Rs.{{ bike.price }}/day</p>
+        <p><strong>Type:</strong> {{ bike.type }}</p>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        mat-flat-button
+        color="primary"
+        routerLink="/customer/book/{{ bike._id }}"
+      >
+        Book
+      </button>
+      <button
+        mat-stroked-button
+        color="primary"
+        routerLink="/customer/bike/details/{{ bike._id }}"
+      >
+        Details
+      </button>
+    </mat-card-actions>
+  </mat-card>
 </div>

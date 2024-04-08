@@ -1,77 +1,94 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-
+import { SnackbarService } from 'src/app/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  hidePassword: boolean = true
-  loginForm!: FormGroup
+  public hidePassword: boolean = true;
+  public loginForm!: FormGroup;
 
-  constructor(private authService: AuthService, private snackbar: MatSnackBar, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private snackbarService: SnackbarService
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email]),
-      password: new FormControl(null, [Validators.required, Validators.minLength(6)]),
-    })
-  }
-
-  openSnackBar(message: string, action: string, panelClass: string, duration: number = 3000) {
-    this.snackbar.open(message, action, {
-      duration: duration,
-      verticalPosition: 'top',
-      panelClass: panelClass
+      password: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(6),
+      ]),
     });
   }
 
-  handleLogin() {
-    if(this.loginForm.value['email'] && this.loginForm.value['password']) {
+  public handleLogin(): void {
+    if (this.loginForm.value['email'] && this.loginForm.value['password']) {
       const credentials = {
         email: this.loginForm.value['email'],
-        password: this.loginForm.value['password']
-      }
+        password: this.loginForm.value['password'],
+      };
       this.authService.logIn(credentials).subscribe({
         next: (res: any) => {
-          // console.log('here',res)
-          if(res.success) {
+          if (res.success) {
             const USERDETAILS = {
               id: res.result.data._id,
               username: res.result.data.username,
               email: res.result.data.email,
-              role: res.result.data.role
+              role: res.result.data.role,
+            };
+            const TOKEN = res.result.token;
+            localStorage.setItem('user', JSON.stringify(USERDETAILS));
+            localStorage.setItem('token', TOKEN);
+            if (this.authService.isAdmin()) {
+              this.snackbarService.openSnackBar(
+                'Welcome admin',
+                'Close',
+                'success-snackbar'
+              );
+              this.router.navigateByUrl('/admin/dashboard');
+            } else {
+              this.snackbarService.openSnackBar(
+                `Welcome ${USERDETAILS.username}`,
+                'Close',
+                'success-snackbar'
+              );
+              this.router.navigateByUrl('/customer/dashboard');
             }
-            const TOKEN = res.result.token
-            localStorage.setItem("user", JSON.stringify(USERDETAILS))
-            localStorage.setItem("token", TOKEN)
-            if(this.authService.isAdmin()) {
-              this.openSnackBar("Welcome admin", "Close", "success-snackbar")
-              this.router.navigateByUrl('/admin/dashboard')
-            }else {
-              this.openSnackBar(`Welcome ${USERDETAILS.username}`, "Close", "success-snackbar")
-              this.router.navigateByUrl('/customer/dashboard')
-            }
-          }else {
-            this.openSnackBar(res.error, "Close", "error-snackbar")
+          } else {
+            this.snackbarService.openSnackBar(
+              res.error,
+              'Close',
+              'error-snackbar'
+            );
           }
         },
         error: (err) => {
-          this.openSnackBar(err.error.error, "Close", "error-snackbar")
-        }
-      })
-    }else {
-      this.openSnackBar("Enter all required fields", "Close", "error-snackbar")
+          this.snackbarService.openSnackBar(
+            err.error.error,
+            'Close',
+            'error-snackbar'
+          );
+        },
+      });
+    } else {
+      this.snackbarService.openSnackBar(
+        'Enter all required fields',
+        'Close',
+        'error-snackbar'
+      );
     }
   }
 
-  togglePasswordVisibility(event: MouseEvent){
-    event.preventDefault()
-    this.hidePassword = !this.hidePassword
+  public togglePasswordVisibility(event: MouseEvent): void {
+    event.preventDefault();
+    this.hidePassword = !this.hidePassword;
   }
 }

@@ -1,0 +1,85 @@
+<div class="main-container">
+  <mat-card class="search-form-container">
+    <mat-card-title class="search-form-title"> Search bike </mat-card-title>
+    <form [formGroup]="searchForm" (ngSubmit)="onSearchBike()">
+      <div class="input-container">
+        <mat-form-field appearance="outline">
+          <mat-label>Bike Brand</mat-label>
+          <mat-select formControlName="bike_brand">
+            <mat-option *ngFor="let item of bikeBrands" value="{{ item }}">{{
+              item
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Bike Name</mat-label>
+          <input matInput type="text" formControlName="bike_name" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Model Year</mat-label>
+          <mat-select formControlName="model_year">
+            <mat-option *ngFor="let item of modelYears" value="{{ item }}">{{
+              item
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Type</mat-label>
+          <mat-select formControlName="type">
+            <mat-option *ngFor="let item of types" value="{{ item }}">{{
+              item
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Price</mat-label>
+          <input matInput type="number" formControlName="price" />
+          <mat-slider min="0" max="2000">
+            <input value="100" matSliderStartThumb [(ngModel)]="minValue" />
+            <input value="800" matSliderEndThumb [(ngModel)]="maxValue" />
+          </mat-slider>
+        </mat-form-field>
+      </div>
+
+      <button mat-raised-button type="submit" color="primary">Search</button>
+    </form>
+  </mat-card>
+
+  <h2 *ngIf="searchClicked && !searchedBikeAvailable" class="no-bike-text">
+    No bikes found
+  </h2>
+
+  <div class="card-container" *ngIf="searchedBikeAvailable">
+    <mat-card *ngFor="let bike of allBikes" class="bike-card-container">
+      <img mat-card-image src="{{ bike.image }}" alt="{{ bike.name }}" />
+      <mat-card-content>
+        <h2>{{ bike.bike_brand }} {{ bike.bike_name }}</h2>
+        <p>{{ bike.description | ellipsis }}</p>
+        <div class="details">
+          <p><strong>Price:</strong> Rs.{{ bike.price }}/day</p>
+          <p><strong>Type:</strong> {{ bike.type }}</p>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          mat-flat-button
+          color="primary"
+          routerLink="/customer/book/{{ bike._id }}"
+        >
+          Book
+        </button>
+        <button
+          mat-stroked-button
+          color="primary"
+          routerLink="/customer/bike/details/{{ bike._id }}"
+        >
+          Details
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

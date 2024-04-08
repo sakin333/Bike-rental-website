@@ -1,32 +1,100 @@
 .mat-toolbar {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  height: 10vh;
 }
 
 .navbar-title {
-    font-size: 1em;
-    color: #333;
-}
-  
-.button-container {
-    display: flex;
-    align-items: center;
+  font-size: 1em;
+  color: #333;
 }
 
-.button-container a {
-    font-size: 16px;
+.nav-links-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-links-container a {
+  margin-right: 20px;
+  font-size: 0.7em;
 }
 
 .home-button,
 .about-button {
-    color: #333;
+  color: #333;
 }
- 
+
 .home-button,
 .about-button,
 .login-button,
 .signup-button {
-    margin-right: 32px;
+  margin-right: 32px;
 }
-  
-  
+
+.menu-button-container {
+  border: none;
+  cursor: pointer;
+  display: none;
+}
+
+.menu-icon {
+  transform: scale(1.2);
+}
+
+.side-menu {
+  position: absolute;
+  top: 64px;
+  right: 0;
+  width: 100px;
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 10px 20px;
+  z-index: 1000;
+  font-size: 0.7em;
+  margin-right: 20px;
+}
+
+.menu-item {
+  display: block;
+  margin-bottom: 10px;
+  color: #333;
+  text-decoration: none;
+}
+
+.menu-item:hover {
+  text-decoration: underline;
+}
+
+.menu-login,
+.menu-signup {
+  width: 100px;
+  margin-left: -5px;
+}
+
+@media screen and (max-width: 768px) {
+  .nav-links-container {
+    display: none;
+  }
+
+  .menu-button-container {
+    display: block;
+  }
+
+  .nav-links-container a {
+    display: block;
+    text-align: center;
+    margin: 10px 0;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .nav-links-container {
+    display: none;
+  }
+
+  .menu-button-container {
+    display: block;
+  }
+}

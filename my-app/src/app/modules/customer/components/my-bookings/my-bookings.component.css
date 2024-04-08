@@ -18,19 +18,57 @@ td {
   margin-top: 16px;
 }
 
+.bookings-title {
+  margin-top: 16px;
+  text-align: center;
+}
+
 .mat-elevation-z8 {
   border: 2px solid #ccc;
   border-radius: 8px;
+}
+
+.table-container {
+  width: 90%;
+  margin: 0 auto;
 }
 
 th.mat-header-cell {
   font-weight: bold;
 }
 
-td.mat-cell.accepted {
-  color: green;
+.notification-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  padding-top: 8px;
 }
 
-td.mat-cell.pending {
-  color: red;
+.card-container {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.card {
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.card mat-card {
+  padding: 0 0 20px 20px;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+.image-container {
+  width: 280px;
+  height: 200px;
+  position: absolute;
+  top: 16px;
+  right: 10%;
 }

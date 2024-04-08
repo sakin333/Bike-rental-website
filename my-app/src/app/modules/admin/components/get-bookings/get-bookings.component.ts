@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { AdminService } from '../../services/admin.service';
-import { User } from 'src/app/model/User';
+import { SnackbarService } from 'src/app/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-get-bookings',
@@ -9,70 +9,109 @@ import { User } from 'src/app/model/User';
   styleUrls: ['./get-bookings.component.css'],
 })
 export class GetBookingsComponent implements OnInit {
-  bookedBikes: any[] = [];
-  isLoading: boolean = false;
-  isBookedBikesAvailable: boolean = false;
-  users: any = []
-  userId: string = ''
+  public bookedBikes: any[] = [];
+  public isLoading: boolean = false;
+  public isBookedBikesAvailable: boolean = false;
+  public users: any = [];
+  public userId: string = '';
 
   constructor(
     private authService: AuthService,
-    private adminService: AdminService
+    private adminService: AdminService,
+    private snackbarService: SnackbarService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    this.userId = this.authService.getUser().id
+    this.userId = this.authService.getUser().id;
     this.isLoading = true;
-    this.getUsersAndBookings()
+    this.getBookingsDetails();
   }
 
-  changeBookingStatus(bookingId: string, status: string) {
-    console.log(this.bookedBikes)
-    console.log(bookingId, status)
-  }
-
-  getUsersAndBookings() {
-    this.adminService.getAllBikes().subscribe({
-      next: (res: any) => {
-        if(res.success) {
-          const data = res.result
-          this.adminService.getUsers().subscribe({
-            next: (userRes: any) => {
-              if(userRes.success) {
-                const users = userRes.result.filter((user: any) => user.role === "CUSTOMER")
-                data.forEach((item: any) => {
-                  item.booking.forEach((bookingItem: any) => {
-                    const user = users.find((u: any) => u._id === bookingItem.requestId)
-                    const username = user ? user.username : "Unknown"
-
-                    this.bookedBikes.push({
-                      id: bookingItem._id,
-                      username: username,
-                      bike_brand: item.bike_brand,
-                      bike_name: item.bike_name,
-                      startTime: bookingItem.startTime,
-                      endTime: bookingItem.endTime,
-                      status: bookingItem.status,
-                    })
-                  })
-                })
-                setTimeout(() => {
-                  this.isLoading = false
-                  this.isBookedBikesAvailable = this.bookedBikes.length > 0
-                }, 2000)
+  public changeBookingStatus(bookingId: string, status: string): void {
+    this.bookedBikes.forEach((bookingItem) => {
+      if (bookingItem.id === bookingId) {
+        const data = {
+          name: bookingItem.username,
+          startTime: bookingItem.startTime,
+          endTime: bookingItem.endTime,
+          requestId: bookingItem.requestId,
+        };
+        this.adminService
+          .changeBookingStatus(bookingId, status, data)
+          .subscribe({
+            next: (res: any) => {
+              if (res.success) {
+                this.bookedBikes.find((bike) => bike.id === bookingId).status =
+                  status;
+                this.cdr.detectChanges();
+                this.snackbarService.openSnackBar(
+                  `Bike ${status}`,
+                  'Close',
+                  'success-snackbar'
+                );
+              } else {
+                this.bookedBikes.find((bike) => bike.id === bookingId).status =
+                  status;
+                this.cdr.detectChanges();
+                this.snackbarService.openSnackBar(
+                  'Approval error',
+                  'Close',
+                  'error-snackbar'
+                );
               }
             },
             error: (err) => {
-              console.log("Error occured",err)
-              this.isLoading = false
+              this.snackbarService.openSnackBar(
+                err.error.error,
+                'Close',
+                'error-snackbar'
+              );
+            },
+          });
+      } else {
+        console.log('Bookign Item id not correct');
+      }
+    });
+  }
+
+  public getBookingsDetails(): void {
+    this.adminService.getAllBikes().subscribe({
+      next: (res: any) => {
+        if (res.success) {
+          const bikeData = res.result;
+          bikeData.forEach((item: any) => {
+            if (item?.booking) {
+              const bookingData = item.booking;
+              bookingData.forEach((bookingItem: any) => {
+                this.bookedBikes.push({
+                  id: bookingItem._id,
+                  username: bookingItem.name,
+                  bike_brand: item.bike_brand,
+                  bike_name: item.bike_name,
+                  startTime: bookingItem.startTime,
+                  endTime: bookingItem.endTime,
+                  status: bookingItem.status,
+                  requestId: bookingItem.requestId,
+                });
+              });
+            } else {
+              console.log('No booking data available');
             }
-          })
+          });
+          setTimeout(() => {
+            this.isLoading = false;
+            this.isBookedBikesAvailable = this.bookedBikes.length > 0;
+          }, 2000);
+        } else {
+          console.log('Error occured while fetching data');
+          this.isLoading = false;
         }
       },
       error: (err) => {
-        console.log("Error occured",err)
-        this.isLoading = false
-      }
-    })
+        console.log('Error occured', err);
+        this.isLoading = false;
+      },
+    });
   }
 }
