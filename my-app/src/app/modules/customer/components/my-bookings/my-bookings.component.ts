@@ -24,7 +24,7 @@ export class MyBookingsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userId = this.authService.getUser().id;
+    this.userId = this.authService.getUser()?.id ?? 'No user id found';
     this.isLoading = true;
     this.getBookingsDetails();
   }

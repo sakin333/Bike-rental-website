@@ -30,7 +30,7 @@ const MaterialComponents = [
   MatProgressSpinnerModule,
   MatBadgeModule,
   MatDialogModule,
-  MatSliderModule
+  MatSliderModule,
 ];
 
 @NgModule({

@@ -3,7 +3,7 @@
 }
 
 .search-form-container {
-  width: 1120px;
+  width: 75%;
   margin: 2em auto;
   padding: 2em;
   text-align: center;
@@ -64,4 +64,15 @@ mat-card-actions {
 
 .no-bike-text {
   text-align: center;
+}
+
+.min-price,
+.max-price {
+  width: 100px !important;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

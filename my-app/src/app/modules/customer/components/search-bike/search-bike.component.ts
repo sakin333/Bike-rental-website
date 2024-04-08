@@ -17,8 +17,6 @@ export class SearchBikeComponent {
   public allBikes: any = [];
   public searchedBikeAvailable: boolean = false;
   public searchClicked: boolean = false;
-  public minValue: number = 100;
-  public maxValue: number = 800;
 
   constructor(
     private adminService: CustomerService,
@@ -31,7 +29,8 @@ export class SearchBikeComponent {
       bike_name: new FormControl(null),
       model_year: new FormControl(null),
       type: new FormControl(null),
-      price: new FormControl(null),
+      minValue: new FormControl(null),
+      maxValue: new FormControl(null),
     });
   }
 
@@ -40,7 +39,7 @@ export class SearchBikeComponent {
     this.adminService.getAllBikes().subscribe({
       next: (res: any) => {
         const data = res.result;
-        const { bike_brand, bike_name, model_year, type, price } =
+        const { bike_brand, bike_name, model_year, type, minValue, maxValue } =
           this.searchForm.value;
 
         this.allBikes = data.filter((item: any) => {
@@ -63,11 +62,11 @@ export class SearchBikeComponent {
             return false;
           }
 
-          if (
-            price &&
-            !(item.price >= this.minValue) &&
-            !(item.price >= this.maxValue)
-          ) {
+          if (minValue && !(item.price >= minValue)) {
+            return false;
+          }
+
+          if (maxValue && !(item.price <= maxValue)) {
             return false;
           }
 

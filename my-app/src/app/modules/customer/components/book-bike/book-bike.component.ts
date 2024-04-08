@@ -12,8 +12,8 @@ import { SnackbarService } from 'src/app/snackbar/snackbar.service';
   styleUrls: ['./book-bike.component.css'],
 })
 export class BookBikeComponent implements OnInit {
-  public userId: string = this.authService.getUser().id;
-  public username: string = this.authService.getUser().username;
+  public userId: string = this.authService.getUser()?.id ?? 'No user id found';
+  public username: string = this.authService.getUser()?.username ?? 'No username found';
   public bikeID: string = this.activatedRoute.snapshot.params['id'];
   public bikeToBeBooked: Bike | undefined;
   public bookingForm!: FormGroup;

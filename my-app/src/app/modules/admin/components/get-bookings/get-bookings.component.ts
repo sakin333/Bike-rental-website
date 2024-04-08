@@ -13,7 +13,7 @@ export class GetBookingsComponent implements OnInit {
   public isLoading: boolean = false;
   public isBookedBikesAvailable: boolean = false;
   public users: any = [];
-  public userId: string = '';
+  public userId: string | null = '';
 
   constructor(
     private authService: AuthService,
@@ -23,7 +23,7 @@ export class GetBookingsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userId = this.authService.getUser().id;
+    this.userId = this.authService.getUser()?.id ?? null;
     this.isLoading = true;
     this.getBookingsDetails();
   }

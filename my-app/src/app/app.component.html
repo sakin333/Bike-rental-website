@@ -57,6 +57,17 @@
       >Logout</a
     >
   </div>
+
+  <!-- Side menu -->
+  <div class="side-menu" *ngIf="isMenuShown">
+    <a mat-button routerLink="/admin/dashboard" class="menu-item">Dashboard</a>
+    <a mat-button routerLink="/admin/bookings" class="menu-item">Bookings</a>
+    <a mat-button routerLink="/admin/bike" class="menu-item">List a bike</a>
+    <a mat-button routerLink="/admin/search" class="menu-item">Search bike</a>
+    <a mat-flat-button color="warn" class="menu-item" (click)="logout()"
+      >Logout</a
+    >
+  </div>
 </mat-toolbar>
 
 <mat-toolbar *ngIf="isCustomerLoggedIn" class="navbar">
@@ -78,6 +89,17 @@
       Feedback
     </button>
     <a mat-flat-button color="warn" class="signup-button" (click)="logout()"
+      >Logout</a
+    >
+  </div>
+
+  <!-- Side menu -->
+  <div class="side-menu" *ngIf="isMenuShown">
+    <a mat-button routerLink="/admin/dashboard" class="menu-item">Dashboard</a>
+    <a mat-button routerLink="/admin/bookings" class="menu-item">My Bookings</a>
+    <a mat-button routerLink="/admin/bike" class="menu-item">Search</a>
+    <a mat-button routerLink="/admin/search" class="menu-item">Feedback</a>
+    <a mat-flat-button color="warn" class="menu-item" (click)="logout()"
       >Logout</a
     >
   </div>
