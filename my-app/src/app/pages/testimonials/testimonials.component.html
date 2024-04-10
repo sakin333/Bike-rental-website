@@ -1,5 +1,8 @@
-<div class="main-container" id="testimonials">
-  <h2>Customers' Testimonials</h2>
+<header>
+  <h1>Customers' Testimonials</h1>
+</header>
+
+<div class="main-container">
   <div class="testimonial-container">
     <div *ngFor="let testimonial of testimonials" class="testimonial-card">
       <mat-card class="testimonial-card-inner">
@@ -21,7 +24,7 @@
             </div>
           </div>
         </mat-card-content>
-        <mat-card-footer>
+        <mat-card-footer class="card-footer">
           <div class="rating">
             <mat-icon
               *ngFor="let icon of starIcons(testimonial.rating)"
@@ -35,3 +38,6 @@
     </div>
   </div>
 </div>
+
+
+

@@ -1,4 +1,4 @@
-<div class="main-container">
+<!-- <div class="main-container">
   <mat-spinner *ngIf="isLoading"></mat-spinner>
 </div>
 
@@ -108,4 +108,69 @@
       ]
     "
   ></tr>
-</table>
+</table> -->
+
+<div class="main-container">
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+</div>
+
+<h2 *ngIf="!isLoading && !isBookedBikesAvailable" class="no-bikes-text">
+  No booked bikes available
+</h2>
+
+<div class="cards-container" *ngIf="!isLoading && isBookedBikesAvailable">
+  <mat-card class="bike-card" *ngFor="let booking of bookedBikes">
+    <mat-card-header class="card-header">
+      <div class="image-container">
+        <img [src]="defaultUrl + '/' + booking.image" alt="Bike Image" />
+      </div>
+      <mat-card-title class="card-title">{{
+        booking.bike_brand
+      }}</mat-card-title>
+      <mat-card-subtitle class="card-subtitle">{{
+        booking.bike_name
+      }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Username: {{ booking.username }}</p>
+      <p>Start Time: {{ booking.startTime | date }}</p>
+      <p>End Time: {{ booking.endTime | date }}</p>
+      <p
+        [ngStyle]="{
+          color:
+            booking.status === 'Pending'
+              ? 'grey'
+              : booking.status === 'Approved'
+              ? 'green'
+              : 'red'
+        }"
+      >
+        Status: {{ booking.status }}
+      </p>
+    </mat-card-content>
+    <mat-card-actions class="button-container">
+      <button
+        mat-stroked-button
+        color="primary"
+        class="action-button"
+        *ngIf="
+          booking.status !== 'Approved' || booking.status === 'Not Accepted'
+        "
+        (click)="changeBookingStatus(booking.id, 'Approved')"
+      >
+        Approve
+      </button>
+      <button
+        mat-stroked-button
+        color="warn"
+        class="action-button"
+        *ngIf="
+          booking.status !== 'Not Approved' || booking.status === 'Approved'
+        "
+        (click)="changeBookingStatus(booking.id, 'Not Approved')"
+      >
+        Reject
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

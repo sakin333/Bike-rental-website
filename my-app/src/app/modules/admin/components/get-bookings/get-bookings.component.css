@@ -50,3 +50,55 @@ td.mat-cell.pending {
   text-align: center;
   margin-top: 16px;
 }
+
+.cards-container {
+  width: 70%;
+  margin: 0 auto;
+  padding-top: 20px;
+}
+
+.bike-card {
+  margin: 0 0 26px 0;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+.image-container {
+  width: 280px;
+  height: 200px;
+  position: absolute;
+  top: 16px;
+  right: 10%;
+}
+
+.button-container {
+  margin-bottom: 8px;
+}
+
+@media screen and (max-width: 720px) {
+  .image-container {
+    display: none;
+  }
+}
+
+
+@media screen and (max-width: 400px) {
+  .button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .cards-container {
+    width: 100%;
+    padding-top: 20px;
+  }
+
+  .bike-card {
+    max-width: 300px;
+    margin: 0 auto 16px auto;
+  }
+}

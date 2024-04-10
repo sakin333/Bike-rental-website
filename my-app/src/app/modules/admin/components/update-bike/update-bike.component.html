@@ -1,6 +1,6 @@
 <div class="main-container">
   <mat-card>
-    <mat-card-title> List a bike </mat-card-title>
+    <mat-card-title> Update bike </mat-card-title>
     <form [formGroup]="updateForm" (ngSubmit)="onUpdateBike()">
       <div>
         <mat-form-field appearance="outline">
@@ -44,10 +44,27 @@
           <input matInput type="number" formControlName="price" required />
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Image URL</mat-label>
-          <input matInput formControlName="image" />
-        </mat-form-field>
+        <div class="file-input-container">
+          <div class="custom-file-input">
+            <label for="imageInput" class="file-upload-label"
+              ><mat-icon>attach_file</mat-icon></label
+            >
+            <img
+              [src]="defaultUrl + '/' + updateForm.get('image')?.value"
+              class="file-upload-image"
+            />
+            <span *ngIf="selectedFileName && updateForm.get('image')?.value">{{
+              selectedFileName
+            }}</span>
+          </div>
+          <input
+            type="file"
+            placeholder="Upload Image"
+            formControlName="image"
+            (change)="handleFileUpload($event)"
+            id="imageInput"
+          />
+        </div>
       </div>
 
       <mat-form-field appearance="outline">

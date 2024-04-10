@@ -17,7 +17,7 @@ export class AdminService {
     });
   }
 
-  public addBike(bike: Bike): Observable<any> {
+  public addBike(bike: any): Observable<any> {
     return this.http.post(`${default_url}/addBike`, bike, {
       headers: this.createAuthorizationHeader(),
     });
@@ -31,7 +31,7 @@ export class AdminService {
 
   public updateBike(
     id: string | undefined,
-    bike: Bike | undefined
+    bike: any
   ): Observable<any> {
     return this.http.post(`${default_url}/updateBike?id=${id}`, bike, {
       headers: this.createAuthorizationHeader(),

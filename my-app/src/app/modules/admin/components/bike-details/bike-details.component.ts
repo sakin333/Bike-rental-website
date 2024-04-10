@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../services/admin.service';
 import { SnackbarService } from 'src/app/snackbar/snackbar.service';
 import { ActivatedRoute } from '@angular/router';
+import { default_url } from 'src/app/constants/constant';
 
 @Component({
   selector: 'app-bike-details',
@@ -11,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 export class BikeDetailsComponent implements OnInit {
   public bikeDetails: any;
   public bikeId: string | null = null;
+  public defaultUrl = default_url;
 
   constructor(
     private adminService: AdminService,

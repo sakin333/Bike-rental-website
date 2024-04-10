@@ -65,10 +65,42 @@ img {
   height: auto;
 }
 
-.image-container {
+.card-for-larger-width .image-container {
   width: 280px;
   height: 200px;
   position: absolute;
   top: 16px;
   right: 10%;
+}
+
+.card-for-smaller-width {
+  display: none;
+}
+
+.button-container {
+  display: flex;
+  gap: 16px;
+}
+
+@media screen and (max-width: 720px) {
+  .card-container {
+    width: 90%;
+  }
+
+  .card-for-larger-width {
+    display: none;
+  }
+
+  .card-for-smaller-width {
+    display: block;
+  }
+
+  .mat-mdc-card-header {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .button-container {
+    align-items: center;
+  }
 }

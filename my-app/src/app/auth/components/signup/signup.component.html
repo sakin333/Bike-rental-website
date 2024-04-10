@@ -1,85 +1,87 @@
-<div class="main-container">
-  <mat-card>
-    <mat-card-title>Signup</mat-card-title>
+<div class="background-image-container">
+  <div class="main-container">
+    <mat-card>
+      <mat-card-title>Signup</mat-card-title>
 
-    <form [formGroup]="reactiveForm" (ngSubmit)="handleSignUp()">
-      <mat-form-field appearance="outline">
-        <mat-label>Email</mat-label>
-        <input
-          matInput
-          placeholder="Email"
-          type="email"
-          formControlName="email"
-        />
-        <mat-error> *Please enter a valid email address. </mat-error>
-      </mat-form-field>
+      <form [formGroup]="reactiveForm" (ngSubmit)="handleSignUp()">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            placeholder="Email"
+            type="email"
+            formControlName="email"
+          />
+          <mat-error> *Please enter a valid email address. </mat-error>
+        </mat-form-field>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Username</mat-label>
-        <input
-          matInput
-          placeholder="Username"
-          type="text"
-          formControlName="username"
-        />
-        <mat-error> *Username is required </mat-error>
-      </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+          <input
+            matInput
+            placeholder="Username"
+            type="text"
+            formControlName="username"
+          />
+          <mat-error> *Username is required </mat-error>
+        </mat-form-field>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Password</mat-label>
-        <input
-          matInput
-          placeholder="Password"
-          [type]="hidePassword ? 'password' : 'text'"
-          formControlName="password"
-        />
-        <button
-          mat-icon-button
-          matSuffix
-          (click)="togglePasswordVisibility($event)"
-          class="eye-icon"
-        >
-          <mat-icon>{{
-            hidePassword ? "visibility_off" : "visibility"
-          }}</mat-icon>
-        </button>
-        <mat-error *ngIf="reactiveForm.get('password')?.errors?.['required']">
-          *Password is required
-        </mat-error>
-        <mat-error
-          *ngIf="reactiveForm.get('password')?.errors?.['minlength']?.actualLength <= 6 && !reactiveForm.get('password')?.errors?.['required']"
-        >
-          *Password must be at least 6 characters long.
-        </mat-error>
-      </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            placeholder="Password"
+            [type]="hidePassword ? 'password' : 'text'"
+            formControlName="password"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="togglePasswordVisibility($event)"
+            class="eye-icon"
+          >
+            <mat-icon>{{
+              hidePassword ? "visibility_off" : "visibility"
+            }}</mat-icon>
+          </button>
+          <mat-error *ngIf="reactiveForm.get('password')?.errors?.['required']">
+            *Password is required
+          </mat-error>
+          <mat-error
+            *ngIf="reactiveForm.get('password')?.errors?.['minlength']?.actualLength <= 6 && !reactiveForm.get('password')?.errors?.['required']"
+          >
+            *Password must be at least 6 characters long.
+          </mat-error>
+        </mat-form-field>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Confirm Password</mat-label>
-        <input
-          matInput
-          placeholder="Confirm Password"
-          [type]="hidePassword ? 'password' : 'text'"
-          formControlName="confirmPassword"
-          (blur)="checkPassword()"
-        />
-        <button
-          mat-icon-button
-          matSuffix
-          (click)="togglePasswordVisibility($event)"
-          class="eye-icon"
-        >
-          <mat-icon>{{
-            hidePassword ? "visibility_off" : "visibility"
-          }}</mat-icon>
-        </button>
-        <mat-error
-          *ngIf="reactiveForm.get('confirmPassword')?.errors?.['passwordDidnotMatch']"
-        >
-          *Your password doesn't match
-        </mat-error>
-      </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Confirm Password</mat-label>
+          <input
+            matInput
+            placeholder="Confirm Password"
+            [type]="hidePassword ? 'password' : 'text'"
+            formControlName="confirmPassword"
+            (blur)="checkPassword()"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="togglePasswordVisibility($event)"
+            class="eye-icon"
+          >
+            <mat-icon>{{
+              hidePassword ? "visibility_off" : "visibility"
+            }}</mat-icon>
+          </button>
+          <mat-error
+            *ngIf="reactiveForm.get('confirmPassword')?.errors?.['passwordDidnotMatch']"
+          >
+            *Your password doesn't match
+          </mat-error>
+        </mat-form-field>
 
-      <button mat-raised-button color="primary" type="submit">Sign Up</button>
-    </form>
-  </mat-card>
+        <button mat-raised-button color="primary" type="submit">Sign Up</button>
+      </form>
+    </mat-card>
+  </div>
 </div>

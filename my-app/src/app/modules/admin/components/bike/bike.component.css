@@ -1,8 +1,8 @@
 .main-container {
-  position: absolute;
-  left: 50%;
-  top: 55%;
-  transform: translate(-50%, -50%);
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 mat-card-title {
@@ -33,3 +33,54 @@ form div > mat-form-field {
 mat-form-field {
   margin-bottom: 1em;
 }
+
+.file-input-container {
+  border: 1px solid #adadad;
+  width: calc(50% - 10px);
+  height: 54px;
+  border-radius: 5px;
+}
+
+.file-input-field {
+  width: 100%;
+}
+
+::-webkit-file-upload-button {
+  height: 54px;
+  border-width: 0;
+  border-right: 1px solid #adadad;
+  outline: none;
+  border-radius: 5px;
+  font-family: 'Roboto', sans-serif;
+}
+
+@media screen and (max-width: 400px) {
+  mat-card {
+    width: 300px;
+    margin: 0 auto;
+    padding: 0.8em 1.2em;
+  }
+
+  mat-form-field {
+    margin-bottom: 2em;
+    height: 40px;
+  }
+
+  form > div {
+    flex-direction: column;
+  }
+
+  form div > mat-form-field {
+    width: 100%;
+  }
+
+  .file-input-container {
+    width: 100%;
+    margin-bottom: 1em;
+  }
+
+  .submit-button {
+    margin-top: 2em;
+  }
+}
+

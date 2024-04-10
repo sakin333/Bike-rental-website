@@ -62,3 +62,11 @@
     margin-bottom: 20px;
   }
 }
+
+@media screen and (max-width: 400px) {
+  .bike-details {
+    max-width: 300px;
+    margin: 30px auto 0 auto;
+  }
+}
+

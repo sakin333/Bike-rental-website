@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { CustomerService } from '../../services/customer.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -38,10 +38,10 @@ export class NotificationComponent implements OnInit {
 
   public generateMessage(status: string): void {
     switch (status) {
-      case 'APPROVED':
+      case 'Approved':
         this.message = `Your booking has been approved. Please pickup your bike at out shop location and make sure to bring the relevant documents.`;
         break;
-      case 'REJECTED':
+      case 'Not Approved':
         this.message = `Your booking has been rejected. Please contact customer support for further assistance.`;
         break;
       default:

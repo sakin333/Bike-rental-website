@@ -1,37 +1,40 @@
-.search-form-title {
-  margin-bottom: 1em;
+/* .main-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .search-form-container {
-  width: 75%;
-  margin: 2em auto;
-  padding: 2em;
-  text-align: center;
-}
-
-form {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 80%;
+  margin: 20px auto 20px auto;
+  padding: 16px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 }
 
 .input-container {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 8px;
   flex-wrap: wrap;
-  gap: 10px;
 }
 
-form div > mat-form-field {
-  width: calc(20% - 10px);
+.min-max-price-container {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
 }
 
-mat-card-content {
-  margin-top: 16px;
-  height: 180px;
-}
-
-mat-form-field {
-  margin-bottom: 0.5em;
+.min-price,
+.max-price {
+  width: 160px !important;
 }
 
 .card-container {
@@ -40,10 +43,87 @@ mat-form-field {
   justify-content: center;
 }
 
-.bike-card-container {
-  width: 330px;
+mat-card {
+  width: 340px;
   margin: 16px;
   padding: 8px;
+}
+
+mat-card-content {
+  margin-top: 16px;
+  height: 180px;
+}
+
+img {
+  max-width: calc(350px - 16px);
+  height: 180px;
+  object-fit: cover;
+}
+
+.details {
+  margin-top: 16px;
+}
+
+mat-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+} */
+
+.main-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.search-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 80%;
+  margin: 20px auto;
+  padding: 16px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+
+.input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.min-max-price-container {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.min-price,
+.max-price {
+  width: 160px !important;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+mat-card {
+  width: 340px;
+  margin: 16px;
+  padding: 8px;
+}
+
+mat-card-content {
+  margin-top: 16px;
+  height: 180px;
 }
 
 img {
@@ -62,17 +142,25 @@ mat-card-actions {
   gap: 8px;
 }
 
-.no-bike-text {
-  text-align: center;
+@media screen and (max-width: 768px) {
+  .search-form-container {
+    width: 90%;
+  }
 }
 
-.min-price,
-.max-price {
-  width: 100px !important;
+@media screen and (max-width: 600px) {
+  .input-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .min-max-price-container {
+    flex-direction: column;
+  }
+
+  .min-price,
+  .max-price {
+    width: 100% !important;
+  }
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}

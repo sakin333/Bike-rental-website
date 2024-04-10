@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
-import { bikeBrands, modelYears, bikeTypes } from 'src/app/constants/constant';
+import {
+  bikeBrands,
+  modelYears,
+  bikeTypes,
+  default_url,
+} from 'src/app/constants/constant';
 import { AdminService } from '../../services/admin.service';
 import { SnackbarService } from 'src/app/snackbar/snackbar.service';
 
@@ -17,6 +22,7 @@ export class SearchBikeComponent {
   public allBikes: any = [];
   public searchedBikeAvailable: boolean = false;
   public searchClicked: boolean = false;
+  public defaultUrl = default_url;
 
   constructor(
     private adminService: AdminService,

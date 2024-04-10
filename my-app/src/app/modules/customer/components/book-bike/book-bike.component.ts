@@ -5,6 +5,7 @@ import { Bike } from 'src/app/model/Bike';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { SnackbarService } from 'src/app/snackbar/snackbar.service';
+import { default_url } from 'src/app/constants/constant';
 
 @Component({
   selector: 'app-book-bike',
@@ -13,11 +14,14 @@ import { SnackbarService } from 'src/app/snackbar/snackbar.service';
 })
 export class BookBikeComponent implements OnInit {
   public userId: string = this.authService.getUser()?.id ?? 'No user id found';
-  public username: string = this.authService.getUser()?.username ?? 'No username found';
+  public username: string =
+    this.authService.getUser()?.username ?? 'No username found';
   public bikeID: string = this.activatedRoute.snapshot.params['id'];
   public bikeToBeBooked: Bike | undefined;
   public bookingForm!: FormGroup;
   public bookings: any = [];
+  public todayDate: Date = new Date();
+  public defaultUrl = default_url;
 
   constructor(
     private customerService: CustomerService,

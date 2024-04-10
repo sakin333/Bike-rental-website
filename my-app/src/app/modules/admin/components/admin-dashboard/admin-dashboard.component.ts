@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../services/admin.service';
 import { tap, map } from 'rxjs/operators';
 import { SnackbarService } from 'src/app/snackbar/snackbar.service';
+import { default_url } from 'src/app/constants/constant';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -10,6 +11,7 @@ import { SnackbarService } from 'src/app/snackbar/snackbar.service';
 })
 export class AdminDashboardComponent implements OnInit {
   public allBikes: any;
+  public defaultUrl = default_url;
 
   constructor(
     private adminService: AdminService,
@@ -25,6 +27,7 @@ export class AdminDashboardComponent implements OnInit {
       next: (res: any) => {
         if (res.success) {
           this.allBikes = res.result;
+          console.log('in dashboard', this.allBikes)
         } else {
           this.snackbar.openSnackBar(res.error, 'Close', 'error-snackbar');
         }

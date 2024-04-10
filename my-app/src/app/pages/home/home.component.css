@@ -3,10 +3,7 @@
   align-items: center;
   justify-content: center;
   height: 90vh;
-  /* background-image: url(../../../assets/gradient.jpg);
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat; */
+  background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
 }
 
 .hero-card {

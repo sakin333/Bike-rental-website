@@ -38,3 +38,13 @@ mat-card-actions {
 mat-error {
   margin-left: -0.5em;
 }
+
+@media screen and (max-width: 431px) {
+  .bike-card {
+    width: 300px;
+  }
+
+  .date-card {
+    width: 300px;
+  }
+}

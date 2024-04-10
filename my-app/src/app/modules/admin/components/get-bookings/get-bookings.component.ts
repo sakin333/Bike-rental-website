@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { AdminService } from '../../services/admin.service';
 import { SnackbarService } from 'src/app/snackbar/snackbar.service';
+import { default_url } from 'src/app/constants/constant';
 
 @Component({
   selector: 'app-get-bookings',
@@ -14,6 +15,7 @@ export class GetBookingsComponent implements OnInit {
   public isBookedBikesAvailable: boolean = false;
   public users: any = [];
   public userId: string | null = '';
+  public defaultUrl = default_url;
 
   constructor(
     private authService: AuthService,
@@ -93,6 +95,7 @@ export class GetBookingsComponent implements OnInit {
                   endTime: bookingItem.endTime,
                   status: bookingItem.status,
                   requestId: bookingItem.requestId,
+                  image: item.image,
                 });
               });
             } else {

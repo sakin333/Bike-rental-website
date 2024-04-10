@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CustomerService } from '../../services/customer.service';
 import { Bike } from 'src/app/model/Bike';
 import { SnackbarService } from 'src/app/snackbar/snackbar.service';
+import { default_url } from 'src/app/constants/constant';
 
 @Component({
   selector: 'app-customer-dashboard',
@@ -10,6 +11,7 @@ import { SnackbarService } from 'src/app/snackbar/snackbar.service';
 })
 export class CustomerDashboardComponent {
   public allBikes: Bike[] = [];
+  public defaultUrl = default_url;
 
   constructor(
     private customerService: CustomerService,

@@ -16,6 +16,7 @@ export class BikeComponent {
   public bikeBrands = bikeBrands;
   public modelYears = modelYears;
   public types = bikeTypes;
+  public imageFile: any
 
   constructor(
     private adminService: AdminService,
@@ -44,17 +45,25 @@ export class BikeComponent {
         'error-snackbar'
       );
     } else {
-      const data = {
-        bike_brand: this.bikeForm.value['bike_brand'],
-        bike_name: this.bikeForm.value['bike_name'].toUpperCase(),
-        model_year: this.bikeForm.value['model_year'],
-        type: this.bikeForm.value['type'],
-        price: this.bikeForm.value['price'],
-        image: this.bikeForm.value['image'],
-        description: this.bikeForm.value['description'],
-      };
-
-      const bikeObservable = this.adminService.addBike(data);
+      // const data = {
+      //   bike_brand: this.bikeForm.value['bike_brand'],
+      //   bike_name: this.bikeForm.value['bike_name'].toUpperCase(),
+      //   model_year: this.bikeForm.value['model_year'],
+      //   type: this.bikeForm.value['type'],
+      //   price: this.bikeForm.value['price'],
+      //   image: this.bikeForm.value['image'],
+      //   description: this.bikeForm.value['description'],
+      // };
+      const formData = new FormData();
+      formData.append('bike_brand', this.bikeForm.get('bike_brand')!.value);
+      formData.append('bike_name', this.bikeForm.get('bike_name')!.value.toUpperCase());
+      formData.append('model_year', this.bikeForm.get('model_year')!.value);
+      formData.append('type', this.bikeForm.get('type')!.value);
+      formData.append('price', this.bikeForm.get('price')!.value);
+      formData.append('image', this.bikeForm.get('image')!.value);
+      formData.append('description', this.bikeForm.get('description')!.value);
+      
+      const bikeObservable = this.adminService.addBike(formData);
       bikeObservable.subscribe({
         next: (res: any) => {
           if (res.success) {
@@ -82,6 +91,15 @@ export class BikeComponent {
           );
         },
       });
+    }
+  }
+
+  public handleFileUpload(event: any): void {
+    if(event.target.files.length > 0) {
+      const file = event.target.files[0]
+      this.bikeForm.patchValue({
+        image: file
+      })
     }
   }
 }

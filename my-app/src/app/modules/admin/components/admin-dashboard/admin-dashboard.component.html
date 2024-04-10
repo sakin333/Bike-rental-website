@@ -1,6 +1,6 @@
 <div class="card-container">
   <mat-card *ngFor="let bike of allBikes">
-    <img mat-card-image src="{{ bike.image }}" alt="{{ bike.name }}" />
+    <img mat-card-image [src]="defaultUrl + '/' + bike.image" alt="{{ bike.name }}" />
     <mat-card-content>
       <h2>{{ bike.bike_brand }} {{ bike.bike_name }}</h2>
       <p>{{ bike.description | ellipsis }}</p>

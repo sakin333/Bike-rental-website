@@ -1,6 +1,9 @@
 <div class="bike-details" *ngIf="bikeDetails">
   <div class="bike-image">
-    <img [src]="bikeDetails.image" [alt]="bikeDetails.bike_name" />
+    <img
+      [src]="defaultUrl + '/' + bikeDetails.image"
+      [alt]="bikeDetails.bike_name"
+    />
   </div>
   <div class="bike-info">
     <h2>{{ bikeDetails.bike_brand }} {{ bikeDetails.bike_name }}</h2>
@@ -16,13 +19,13 @@
       <p><strong>Gears:</strong> {{ bikeDetails.gears }}</p>
     </div>
     <button
-      mat-stroked-button
+      mat-flat-button
       color="primary"
       routerLink="/admin/bike/{{ bikeDetails._id }}"
       class="update-button"
     >
       Update
     </button>
-    <button mat-stroked-button color="warn">Delete</button>
+    <button mat-flat-button color="warn">Delete</button>
   </div>
 </div>

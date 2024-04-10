@@ -1,4 +1,4 @@
-.search-form-title {
+/* .search-form-title {
   margin-bottom: 1em;
 }
 
@@ -66,13 +66,154 @@ mat-card-actions {
   text-align: center;
 }
 
+.min-max-price-container {
+  display: flex;
+  gap: 8px;
+}
+
 .min-price,
 .max-price {
-  width: 100px !important;
+  width: 104px !important;
+}
+
+.price-label {
+  font-size: 12px;
 }
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+@media screen and (max-width: 400px) {
+  .input-container {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  form div > mat-form-field {
+    width: 100%;
+  }
+
+  mat-form-field {
+    margin-bottom: 0;
+  }
+
+  mat-label {
+    font-size: 14px;
+  }
+
+  .min-max-price-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .min-price,
+  .max-price {
+    width: 100px !important;
+  }
+
+  .search-button {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .bike-card-container {
+    width: 290px;
+  }
+} */
+
+.main-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.search-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 80%;
+  margin: 20px auto;
+  padding: 16px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+
+.input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.min-max-price-container {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.min-price,
+.max-price {
+  width: 160px !important;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+mat-card {
+  width: 340px;
+  margin: 16px;
+  padding: 8px;
+}
+
+mat-card-content {
+  margin-top: 16px;
+  height: 180px;
+}
+
+img {
+  max-width: calc(350px - 16px);
+  height: 180px;
+  object-fit: cover;
+}
+
+.details {
+  margin-top: 16px;
+}
+
+mat-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+@media screen and (max-width: 768px) {
+  .search-form-container {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .input-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .min-max-price-container {
+    flex-direction: column;
+  }
+
+  .min-price,
+  .max-price {
+    width: 100% !important;
+  }
 }

@@ -4,6 +4,7 @@ import { CustomerService } from '../../services/customer.service';
 import { Bike } from 'src/app/model/Bike';
 import { SnackbarService } from 'src/app/snackbar/snackbar.service';
 import { Router } from '@angular/router';
+import { default_url } from 'src/app/constants/constant';
 
 @Component({
   selector: 'app-my-bookings',
@@ -15,6 +16,7 @@ export class MyBookingsComponent implements OnInit {
   public bookedBikes: any[] = [];
   public isLoading: boolean = false;
   public isBookedBikesAvailable: boolean = false;
+  public defaultUrl = default_url;
 
   constructor(
     private authService: AuthService,

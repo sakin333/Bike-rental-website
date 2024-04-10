@@ -1,108 +1,144 @@
-<mat-toolbar class="navbar" *ngIf="!isAdminLoggedIn && !isCustomerLoggedIn">
-  <div class="navbar-title-container">
-    <a href="#" class="navbar-title">Bike-Rent</a>
-  </div>
+<div id="wrapper">
+  <mat-toolbar class="navbar" *ngIf="!isAdminLoggedIn && !isCustomerLoggedIn">
+    <div class="navbar-title-container">
+      <a href="#" class="navbar-title">Bike-Rent</a>
+    </div>
 
-  <div class="nav-links-container">
-    <a routerLink="/home" class="home-button">Home</a>
-    <a routerLink="/about" class="about-button">About</a>
-    <a href="/testimonials" class="about-button">Testimonials</a>
-    <a mat-flat-button routerLink="/login" class="login-button">Login</a>
-    <a mat-flat-button color="warn" routerLink="/register" class="signup-button"
-      >Signup</a
-    >
-  </div>
+    <div class="nav-links-container">
+      <a routerLink="/home" class="home-button">Home</a>
+      <a routerLink="/about" class="about-button">About</a>
+      <a routerLink="/testimonials" class="about-button">Testimonials</a>
+      <a mat-stroked-button color="primary" routerLink="/login" class="login-button">Login</a>
+      <a
+        mat-flat-button
+        color="warn"
+        routerLink="/register"
+        class="signup-button"
+        >Signup</a
+      >
+    </div>
 
-  <button class="menu-button-container" (click)="toggleMenu()">
-    <mat-icon class="menu-icon">menu</mat-icon>
-  </button>
-
-  <!-- Side menu -->
-  <div class="side-menu" *ngIf="isMenuShown">
-    <a routerLink="/home" class="menu-item">Home</a>
-    <a routerLink="/about" class="menu-item">About</a>
-    <a routerLink="/testimonials" class="menu-item">Testimonials</a>
-    <a
-      mat-button
-      color="primary"
-      routerLink="/login"
-      class="menu-item menu-login"
-      >Login</a
+    <button
+      class="menu-button-container"
+      mat-icon-button
+      (click)="toggleMenu()"
     >
-    <a
-      mat-button
-      color="warn"
-      routerLink="/register"
-      class="menu-item menu-signup"
-      >Signup</a
-    >
-  </div>
-</mat-toolbar>
-
-<mat-toolbar *ngIf="isAdminLoggedIn" class="navbar">
-  <div class="navbar-title-container">
-    <a href="#" class="navbar-title">Admin</a>
-  </div>
-
-  <div class="nav-links-container">
-    <a mat-button routerLink="/admin/dashboard" class="login-button"
-      >Dashboard</a
-    >
-    <a mat-button routerLink="/admin/bookings" class="login-button">Bookings</a>
-    <a mat-button routerLink="/admin/bike" class="login-button">List a bike</a>
-    <a mat-button routerLink="/admin/search" class="login-button"
-      >Search bike</a
-    >
-    <a mat-flat-button color="warn" class="signup-button" (click)="logout()"
-      >Logout</a
-    >
-  </div>
-
-  <!-- Side menu -->
-  <div class="side-menu" *ngIf="isMenuShown">
-    <a mat-button routerLink="/admin/dashboard" class="menu-item">Dashboard</a>
-    <a mat-button routerLink="/admin/bookings" class="menu-item">Bookings</a>
-    <a mat-button routerLink="/admin/bike" class="menu-item">List a bike</a>
-    <a mat-button routerLink="/admin/search" class="menu-item">Search bike</a>
-    <a mat-flat-button color="warn" class="menu-item" (click)="logout()"
-      >Logout</a
-    >
-  </div>
-</mat-toolbar>
-
-<mat-toolbar *ngIf="isCustomerLoggedIn" class="navbar">
-  <div class="navbar-title-container">
-    <a href="#" class="navbar-title">Bike Rent</a>
-  </div>
-
-  <div class="nav-links-container">
-    <a mat-button routerLink="/customer/dashboard" class="login-button"
-      >Dashboard</a
-    >
-    <a mat-button routerLink="/customer/mybookings" class="login-button"
-      >My Bookings</a
-    >
-    <a mat-button routerLink="/customer/search-bike" class="login-button"
-      >Search</a
-    >
-    <button mat-button (click)="openFeedbackDialog()" class="login-button">
-      Feedback
+      <mat-icon class="menu-icon">menu</mat-icon>
     </button>
-    <a mat-flat-button color="warn" class="signup-button" (click)="logout()"
-      >Logout</a
-    >
-  </div>
 
-  <!-- Side menu -->
-  <div class="side-menu" *ngIf="isMenuShown">
-    <a mat-button routerLink="/admin/dashboard" class="menu-item">Dashboard</a>
-    <a mat-button routerLink="/admin/bookings" class="menu-item">My Bookings</a>
-    <a mat-button routerLink="/admin/bike" class="menu-item">Search</a>
-    <a mat-button routerLink="/admin/search" class="menu-item">Feedback</a>
-    <a mat-flat-button color="warn" class="menu-item" (click)="logout()"
-      >Logout</a
-    >
-  </div>
-</mat-toolbar>
+    <!-- Side menu -->
+    <div class="side-menu" *ngIf="isMenuShown">
+      <a routerLink="/home" class="menu-item">Home</a>
+      <a routerLink="/about" class="menu-item">About</a>
+      <a routerLink="/testimonials" class="menu-item">Testimonials</a>
+      <a
+        mat-button
+        color="primary"
+        routerLink="/login"
+        class="menu-item menu-login"
+        >Login</a
+      >
+      <a
+        mat-button
+        color="warn"
+        routerLink="/register"
+        class="menu-item menu-signup"
+        >Signup</a
+      >
+    </div>
+  </mat-toolbar>
 
-<router-outlet></router-outlet>
+  <mat-toolbar *ngIf="isAdminLoggedIn" class="navbar">
+    <div class="navbar-title-container">
+      <a href="#" class="navbar-title">Admin</a>
+    </div>
+
+    <div class="nav-links-container">
+      <a mat-button routerLink="/admin/dashboard" class="login-button"
+        >Dashboard</a
+      >
+      <a mat-button routerLink="/admin/bookings" class="login-button"
+        >Bookings</a
+      >
+      <a mat-button routerLink="/admin/bike" class="login-button"
+        >List a bike</a
+      >
+      <a mat-button routerLink="/admin/search" class="login-button"
+        >Search bike</a
+      >
+      <a mat-flat-button color="warn" class="signup-button" (click)="logout()"
+        >Logout</a
+      >
+    </div>
+
+    <button
+      class="menu-button-container"
+      (click)="toggleMenu()"
+      mat-icon-button
+    >
+      <mat-icon class="menu-icon">menu</mat-icon>
+    </button>
+
+    <!-- Side menu -->
+    <div class="side-menu" *ngIf="isMenuShown">
+      <a mat-button routerLink="/admin/dashboard" class="menu-item"
+        >Dashboard</a
+      >
+      <a mat-button routerLink="/admin/bookings" class="menu-item">Bookings</a>
+      <a mat-button routerLink="/admin/bike" class="menu-item">List a bike</a>
+      <a mat-button routerLink="/admin/search" class="menu-item">Search bike</a>
+      <a mat-button color="warn" class="menu-item" (click)="logout()">Logout</a>
+    </div>
+  </mat-toolbar>
+
+  <mat-toolbar *ngIf="isCustomerLoggedIn" class="navbar">
+    <div class="navbar-title-container">
+      <a href="#" class="navbar-title">Bike Rent</a>
+    </div>
+
+    <div class="nav-links-container">
+      <a mat-button routerLink="/customer/dashboard" class="login-button"
+        >Dashboard</a
+      >
+      <a mat-button routerLink="/customer/mybookings" class="login-button"
+        >My Bookings</a
+      >
+      <a mat-button routerLink="/customer/search-bike" class="login-button"
+        >Search</a
+      >
+      <button mat-button (click)="openFeedbackDialog()" class="login-button">
+        Feedback
+      </button>
+      <a mat-flat-button color="warn" class="signup-button" (click)="logout()"
+        >Logout</a
+      >
+    </div>
+
+    <button
+      class="menu-button-container"
+      (click)="toggleMenu()"
+      mat-icon-button
+    >
+      <mat-icon class="menu-icon">menu</mat-icon>
+    </button>
+
+    <!-- Side menu -->
+    <div class="side-menu" *ngIf="isMenuShown">
+      <a mat-button routerLink="/customer/dashboard" class="menu-item"
+        >Dashboard</a
+      >
+      <a mat-button routerLink="/customer/mybookings" class="menu-item"
+        >My Bookings</a
+      >
+      <a mat-button routerLink="/customer/search-bike" class="menu-item"
+        >Search</a
+      >
+      <button mat-button (click)="openFeedbackDialog()" class="login-button">
+        Feedback
+      </button>
+      <a mat-button color="warn" class="menu-item" (click)="logout()">Logout</a>
+    </div>
+  </mat-toolbar>
+
+  <router-outlet></router-outlet>
+</div>

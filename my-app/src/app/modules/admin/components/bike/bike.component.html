@@ -43,11 +43,10 @@
           <mat-label>Price</mat-label>
           <input matInput type="number" formControlName="price" required />
         </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Image URL</mat-label>
-          <input matInput formControlName="image" />
-        </mat-form-field>
+        
+        <div class="file-input-container">
+          <input type="file" placeholder="Upload Image" class="file-input-field" formControlName="image" (change)="handleFileUpload($event)">
+        </div>
       </div>
 
       <mat-form-field appearance="outline">
@@ -55,7 +54,7 @@
         <textarea matInput formControlName="description"></textarea>
       </mat-form-field>
 
-      <button mat-raised-button type="submit" color="primary">Submit</button>
+      <button mat-raised-button type="submit" color="primary" class="submit-button">Submit</button>
     </form>
   </mat-card>
 </div>

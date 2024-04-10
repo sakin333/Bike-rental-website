@@ -8,6 +8,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
+const multer = require("multer");
 const moment = require("moment");
 
 const app = express();
@@ -16,6 +17,19 @@ const secretKey = "secretkey";
 
 app.use(bodyParser.json());
 app.use(cors());
+app.use("/image", express.static("./image"));
+
+const fileStorageEngine = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "./image");
+  },
+
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
+
+const upload = multer({ storage: fileStorageEngine });
 
 app.post("/signup", async (req, res) => {
   let repeatedEmail = await User.findOne({ email: req.body.email });
@@ -85,7 +99,7 @@ app.get("/users", verifyToken, async (req, res) => {
   });
 });
 
-app.post("/addBike", verifyToken, async (req, res) => {
+app.post("/addBike", verifyToken, upload.single("image"), async (req, res) => {
   jwt.verify(req.token, secretKey, async (error, authData) => {
     if (error) {
       res.json({ error: "Invalid token" });
@@ -96,15 +110,16 @@ app.post("/addBike", verifyToken, async (req, res) => {
         req.body.model_year &&
         req.body.type &&
         req.body.price &&
-        req.body.image
+        req.file.path
       ) {
+        console.log("file path", req.file.path);
         let data = new Bike({
           bike_brand: req.body.bike_brand,
           bike_name: req.body.bike_name,
           model_year: req.body.model_year,
           type: req.body.type,
           price: req.body.price,
-          image: req.body.image,
+          image: req.file.path,
           description: req.body.description,
         });
         let result = await data.save();
@@ -133,52 +148,58 @@ app.get("/getAllBikes", verifyToken, async (req, res) => {
   });
 });
 
-app.post("/updateBike", verifyToken, async (req, res) => {
-  jwt.verify(req.token, secretKey, async (error, authData) => {
-    if (error) {
-      res.json({ error: "Invalid token" });
-    } else {
-      if (req.query.id) {
-        let data = await Bike.findOne({ _id: req.query.id });
-        if (data) {
-          if (
-            req.body.bike_name &&
-            req.body.bike_brand &&
-            req.body.model_year &&
-            req.body.type &&
-            req.body.price &&
-            req.body.image &&
-            req.body.description
-          ) {
-            let result = await Bike.findOneAndUpdate(
-              { _id: req.query.id },
-              {
-                $set: {
-                  bike_brand: req.body.bike_brand,
-                  bike_name: req.body.bike_name,
-                  model_year: req.body.model_year,
-                  type: req.body.type,
-                  price: req.body.price,
-                  image: req.body.image,
-                  description: req.body.description,
+app.post(
+  "/updateBike",
+  verifyToken,
+  upload.single("image"),
+  async (req, res) => {
+    jwt.verify(req.token, secretKey, async (error, authData) => {
+      if (error) {
+        res.json({ error: "Invalid token" });
+      } else {
+        if (req.query.id) {
+          let data = await Bike.findOne({ _id: req.query.id });
+          if (data) {
+            if (
+              req.body.bike_name &&
+              req.body.bike_brand &&
+              req.body.model_year &&
+              req.body.type &&
+              req.body.price &&
+              req.body.description
+            ) {
+              const imagePath =
+                req.file && req.file.path ? req.file.path : data.image;
+              let result = await Bike.findOneAndUpdate(
+                { _id: req.query.id },
+                {
+                  $set: {
+                    bike_brand: req.body.bike_brand,
+                    bike_name: req.body.bike_name,
+                    model_year: req.body.model_year,
+                    type: req.body.type,
+                    price: req.body.price,
+                    image: imagePath,
+                    description: req.body.description,
+                  },
                 },
-              },
-              { new: true }
-            );
-            result = result.toObject();
-            res.status(200).json({ success: true, result: result, authData });
+                { new: true }
+              );
+              result = result.toObject();
+              res.status(200).json({ success: true, result: result, authData });
+            } else {
+              res.status(400).json({ error: "Missing required fields" });
+            }
           } else {
-            res.status(400).json({ error: "Missing required fields" });
+            res.status(400).json({ error: "Invalid bike ID" });
           }
         } else {
-          res.status(400).json({ error: "Invalid bike ID" });
+          res.status(400).json({ error: "Bike ID required" });
         }
-      } else {
-        res.status(400).json({ error: "Bike ID required" });
       }
-    }
-  });
-});
+    });
+  }
+);
 
 app.delete("/deleteBike", verifyToken, async (req, res) => {
   jwt.verify(req.token, secretKey, async (error, authData) => {
@@ -225,9 +246,9 @@ app.post("/booking", verifyToken, async (req, res) => {
                 "booking.endTime": { $gt: startTime },
               });
               if (
-                bookingCheck &&
-                bookingCheck.booking &&
-                bookingCheck.booking.length > 0
+                bookingCheck
+                // bookingCheck.booking &&
+                // bookingCheck.booking.length > 0
               ) {
                 res
                   .status(400)
