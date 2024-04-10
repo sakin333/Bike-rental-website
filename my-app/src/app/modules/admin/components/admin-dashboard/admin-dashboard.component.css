@@ -8,7 +8,7 @@
 }
 
 .analytics-card {
-  width: 86%;
+  width: 84%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 16px;

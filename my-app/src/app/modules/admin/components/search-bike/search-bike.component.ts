@@ -23,6 +23,7 @@ export class SearchBikeComponent {
   public searchedBikeAvailable: boolean = false;
   public searchClicked: boolean = false;
   public defaultUrl = default_url;
+  public isOptionShown: boolean = false;
 
   constructor(
     private adminService: AdminService,
@@ -32,13 +33,18 @@ export class SearchBikeComponent {
   ngOnInit(): void {
     this.searchForm = new FormGroup({
       bike_brand: new FormControl(null),
-      bike_name: new FormControl(null),
+      bike_name: new FormControl(null, Validators.required),
       model_year: new FormControl(null),
       type: new FormControl(null),
       price: new FormControl(null),
       minValue: new FormControl(null),
       maxValue: new FormControl(null),
     });
+  }
+
+  public toggleOptions(event: Event) {
+    event.preventDefault();
+    this.isOptionShown = !this.isOptionShown;
   }
 
   public onSearchBike(): void {
@@ -81,6 +87,7 @@ export class SearchBikeComponent {
         });
 
         this.searchedBikeAvailable = this.allBikes.length > 0;
+        this.isOptionShown = false;
       },
       error: (err) => {
         this.snackbar.openSnackBar(err.error, 'Close', 'error-snackbar');

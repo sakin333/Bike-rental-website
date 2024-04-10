@@ -2,7 +2,7 @@
   <div class="main-container">
     <mat-card>
       <mat-card-title>Login</mat-card-title>
-  
+
       <form [formGroup]="loginForm" (ngSubmit)="handleLogin()">
         <mat-form-field appearance="outline">
           <mat-label>Email</mat-label>
@@ -14,7 +14,7 @@
           />
           <mat-error> *Please enter a valid email address. </mat-error>
         </mat-form-field>
-  
+
         <mat-form-field appearance="outline">
           <mat-label>Password</mat-label>
           <input
@@ -37,10 +37,16 @@
             *Password is required
           </mat-error>
         </mat-form-field>
-  
-        <button mat-raised-button color="primary" type="submit">Login</button>
+
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          class="login-button"
+        >
+          Login
+        </button>
       </form>
     </mat-card>
   </div>
 </div>
-

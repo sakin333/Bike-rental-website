@@ -6,8 +6,8 @@
   background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
 }
 
-mat-card-title {
-  margin-bottom: 1em;
+.title {
+  margin-bottom: 24px;
 }
 
 mat-card {
@@ -15,6 +15,7 @@ mat-card {
   margin: 2em auto;
   padding: 2em;
   text-align: center;
+  border-radius: 18px;
 }
 
 form {
@@ -53,6 +54,10 @@ mat-form-field {
   outline: none;
   border-radius: 5px;
   font-family: "Roboto", sans-serif;
+}
+
+.submit-button {
+  height: 40px;
 }
 
 @media screen and (max-width: 400px) {

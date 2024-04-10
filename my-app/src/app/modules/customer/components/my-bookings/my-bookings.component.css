@@ -60,11 +60,11 @@ th.mat-header-cell {
 .card {
   position: relative;
   width: 90%;
-  margin: 0 auto 16px auto;
+  margin: 0 auto 8px auto;
 }
 
 .card mat-card {
-  padding: 0 0 20px 20px;
+  padding: 0 0 10px 20px;
   border-radius: 16px;
 }
 

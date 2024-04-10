@@ -13,6 +13,7 @@
   height: 10vh;
   background-color: #fff;
   box-shadow: rgba(23, 23, 34, 0.1) 0px 1px 0px;
+  padding: 0 0 0 26px;
 }
 
 .navbar-title {

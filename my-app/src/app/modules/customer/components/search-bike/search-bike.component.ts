@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CustomerService } from '../../services/customer.service';
 import { SnackbarService } from 'src/app/snackbar/snackbar.service';
 import {
@@ -23,6 +23,7 @@ export class SearchBikeComponent {
   public searchedBikeAvailable: boolean = false;
   public searchClicked: boolean = false;
   public defaultUrl = default_url;
+  public isOptionShown: boolean = false;
 
   constructor(
     private adminService: CustomerService,
@@ -32,12 +33,17 @@ export class SearchBikeComponent {
   ngOnInit(): void {
     this.searchForm = new FormGroup({
       bike_brand: new FormControl(null),
-      bike_name: new FormControl(null),
+      bike_name: new FormControl(null, Validators.required),
       model_year: new FormControl(null),
       type: new FormControl(null),
       minValue: new FormControl(null),
       maxValue: new FormControl(null),
     });
+  }
+
+  public toggleOptions(event: Event) {
+    event.preventDefault();
+    this.isOptionShown = !this.isOptionShown;
   }
 
   public onSearchBike(): void {
@@ -80,8 +86,7 @@ export class SearchBikeComponent {
         });
 
         this.searchedBikeAvailable = this.allBikes.length > 0;
-
-        console.log('all bikes', this.allBikes);
+        this.isOptionShown = false;
       },
       error: (err) => {
         this.snackbar.openSnackBar(err.error, 'Close', 'error-snackbar');

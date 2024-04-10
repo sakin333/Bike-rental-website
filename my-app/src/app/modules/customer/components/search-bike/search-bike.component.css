@@ -5,41 +5,86 @@
 
 .main-container {
   display: flex;
-  align-items: center;
   flex-direction: column;
-  padding: 20px;
+  padding: 22px;
+  align-items: center;
 }
 
 .search-form-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  width: 80%;
-  margin: 20px auto;
+  width: 40%;
   padding: 16px;
+  display: flex;
+  align-items: center;
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
     rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  border-radius: 18px;
+}
+
+.search-form {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+
+.search-form-title {
+  margin-bottom: 16px;
+  font-size: 22px;
 }
 
 .input-container {
+  flex: 0 0 calc(75% - 16px);
+  position: relative;
+}
+
+.name-input-form-field {
+  width: 100%;
+}
+
+.search-option-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 999;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: row;
-  gap: 8px;
-  flex-wrap: wrap;
+}
+
+.subject-icon {
+  font-size: 34px;
+  height: 40px;
+  width: 40px;
+}
+
+.search-button {
+  flex: 0 0 25%;
+  height: 56px;
+  font-size: 18px;
+}
+
+.search-icon {
+  font-size: 20px;
+}
+
+.option-container {
+  border: 1px solid rgb(150, 150, 150);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  width: 300px;
+  background-color: #fff;
+  position: absolute;
+  top: 70px;
+  right: 0;
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  z-index: 999;
 }
 
 .min-max-price-container {
   display: flex;
-  flex-direction: row;
-  gap: 8px;
-}
-
-.min-price,
-.max-price {
-  width: 160px !important;
+  gap: 16px;
 }
 
 .card-container {
@@ -52,6 +97,7 @@ mat-card {
   width: 340px;
   margin: 16px;
   padding: 8px;
+  border-radius: 16px;
 }
 
 mat-card-content {
@@ -63,6 +109,8 @@ img {
   max-width: calc(350px - 16px);
   height: 180px;
   object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid rgb(220, 215, 215);
 }
 
 .details {
@@ -75,24 +123,22 @@ mat-card-actions {
   gap: 8px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 720px) {
   .search-form-container {
-    width: 90%;
+    width: 80%;
   }
 }
 
-@media screen and (max-width: 600px) {
-  .input-container {
-    flex-direction: column;
-    align-items: stretch;
+@media screen and (max-width: 460px) {
+  .search-form-container {
+    width: 100%;
   }
 
-  .min-max-price-container {
-    flex-direction: column;
+  .search-button {
+    font-size: 14px;
   }
 
-  .min-price,
-  .max-price {
-    width: 100% !important;
+  .search-icon {
+    font-size: 16px;
   }
 }
