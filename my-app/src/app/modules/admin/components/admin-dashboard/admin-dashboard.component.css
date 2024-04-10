@@ -1,3 +1,55 @@
+.wrapper {
+  background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+  padding: 22px 0;
+}
+
+.analytics-card > div {
+  border: 1px solid red;
+}
+
+.analytics-card {
+  width: 86%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 22px auto 22px auto;
+}
+
+.analytics-card div {
+  text-align: center;
+  border: 1px solid #cfd9df;
+  padding: 8px 0;
+  border-radius: 6px;
+}
+
+.analytics-card h4 {
+  margin: 0;
+  color: #333;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.analytics-card h2 {
+  margin: 5px 0;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.analytics-card .pending-qty {
+  color: #767b7e;
+}
+
+.analytics-card .approved-qty {
+  color: green;
+}
+
+.analytics-card .rejected-qty {
+  color: red;
+}
+
 .card-container {
   display: flex;
   flex-wrap: wrap;
@@ -8,12 +60,15 @@ mat-card {
   width: 330px;
   margin: 16px;
   padding: 8px;
+  border-radius: 16px;
 }
 
 img {
   max-width: calc(350px - 16px);
   height: 180px;
   object-fit: cover;
+  border: 1px solid rgb(220, 215, 215);
+  border-radius: 8px;
 }
 
 mat-card-content {
@@ -29,4 +84,15 @@ mat-card-actions {
   display: flex;
   align-items: center;
   gap: 8px;
+  justify-content: center;
+}
+
+@media screen and (max-width: 720px) {
+  .analytics-card h4 {
+    font-size: 14px;
+  }
+
+  .analytics-card h2 {
+    font-size: 20px;
+  }
 }

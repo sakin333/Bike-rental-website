@@ -3,6 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
 }
 
 mat-card-title {
@@ -51,7 +52,7 @@ mat-form-field {
   border-right: 1px solid #adadad;
   outline: none;
   border-radius: 5px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 @media screen and (max-width: 400px) {
@@ -83,4 +84,3 @@ mat-form-field {
     margin-top: 2em;
   }
 }
-

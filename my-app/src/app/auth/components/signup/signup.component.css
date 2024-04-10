@@ -1,5 +1,5 @@
 .background-image-container {
-  background-image: url(../../../../assets/Wave.svg);
+  background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -19,6 +19,7 @@ mat-card {
   margin: 2em auto;
   padding: 2em;
   text-align: center;
+  border-radius: 18px;
 }
 
 form {

@@ -16,7 +16,7 @@
 .feedback-card {
   width: 400px;
   margin: 0 auto 0 auto;
-  padding: 16px;
+  padding: 20px;
 }
 
 .feedback-form {
@@ -26,6 +26,7 @@
 
 .feedback-form h4 {
   margin-bottom: 8px;
+  font-weight: 500;
 }
 
 .feedback-form mat-form-field {

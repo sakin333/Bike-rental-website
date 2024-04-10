@@ -1,176 +1,66 @@
-<!-- <div class="main-container">
-  <mat-spinner *ngIf="isLoading"></mat-spinner>
-</div>
-
-<h2 *ngIf="!isLoading && !isBookedBikesAvailable" class="no-bikes-text">
-  No booked bikes available
-</h2>
-
-<table
-  mat-table
-  [dataSource]="bookedBikes"
-  class="mat-elevation-z8"
-  *ngIf="!isLoading && isBookedBikesAvailable"
->
-  <ng-container matColumnDef="bikeBrand">
-    <th mat-header-cell *matHeaderCellDef>Bike Brand</th>
-    <td mat-cell *matCellDef="let bike">{{ bike.bike_brand }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="bikeName">
-    <th mat-header-cell *matHeaderCellDef>Bike Name</th>
-    <td mat-cell *matCellDef="let bike">{{ bike.bike_name }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="userName">
-    <th mat-header-cell *matHeaderCellDef>Username</th>
-    <td mat-cell *matCellDef="let bike">{{ bike.username }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="startTime">
-    <th mat-header-cell *matHeaderCellDef>Start Time</th>
-    <td mat-cell *matCellDef="let booking">{{ booking.startTime | date }}</td>
-  </ng-container>
-  <ng-container matColumnDef="endTime">
-    <th mat-header-cell *matHeaderCellDef>End Time</th>
-    <td mat-cell *matCellDef="let booking">{{ booking.endTime | date }}</td>
-  </ng-container>
-  <ng-container matColumnDef="status">
-    <th mat-header-cell *matHeaderCellDef>Status</th>
-    <td
-      mat-cell
-      *matCellDef="let booking"
-      [ngStyle]="{
-        color:
-          booking.status === 'Pending'
-            ? 'grey'
-            : booking.status === 'Approved'
-            ? 'green'
-            : 'red'
-      }"
-    >
-      {{ booking.status }}
-    </td>
-  </ng-container>
-
-  <ng-container matColumnDef="changeStatus">
-    <th mat-header-cell *matHeaderCellDef class="action-header">Action</th>
-    <td mat-cell *matCellDef="let booking" class="button-cell">
-      <button
-        mat-stroked-button
-        color="primary"
-        class="action-button"
-        *ngIf="
-          booking.status !== 'Approved' || booking.status === 'Not Accepted'
-        "
-        (click)="changeBookingStatus(booking.id, 'Approved')"
-      >
-        Approve
-      </button>
-      <button
-        mat-stroked-button
-        color="warn"
-        class="action-button"
-        *ngIf="
-          booking.status !== 'Not Approved' || booking.status === 'Approved'
-        "
-        (click)="changeBookingStatus(booking.id, 'Not Approved')"
-      >
-        Reject
-      </button>
-    </td>
-  </ng-container>
-
-  <tr
-    mat-header-row
-    *matHeaderRowDef="[
-      'bikeBrand',
-      'bikeName',
-      'userName',
-      'startTime',
-      'endTime',
-      'status',
-      'changeStatus'
-    ]"
-  ></tr>
-  <tr
-    mat-row
-    *matRowDef="
-      let row;
-      columns: [
-        'bikeBrand',
-        'bikeName',
-        'userName',
-        'startTime',
-        'endTime',
-        'status',
-        'changeStatus'
-      ]
-    "
-  ></tr>
-</table> -->
+<mat-spinner *ngIf="isLoading" class="spinner"></mat-spinner>
 
 <div class="main-container">
-  <mat-spinner *ngIf="isLoading"></mat-spinner>
-</div>
+  <h2 *ngIf="!isLoading" class="title">Bookings</h2>
 
-<h2 *ngIf="!isLoading && !isBookedBikesAvailable" class="no-bikes-text">
-  No booked bikes available
-</h2>
+  <h2 *ngIf="!isLoading && !isBookedBikesAvailable" class="no-bikes-text">
+    No booked bikes available
+  </h2>
 
-<div class="cards-container" *ngIf="!isLoading && isBookedBikesAvailable">
-  <mat-card class="bike-card" *ngFor="let booking of bookedBikes">
-    <mat-card-header class="card-header">
-      <div class="image-container">
-        <img [src]="defaultUrl + '/' + booking.image" alt="Bike Image" />
-      </div>
-      <mat-card-title class="card-title">{{
-        booking.bike_brand
-      }}</mat-card-title>
-      <mat-card-subtitle class="card-subtitle">{{
-        booking.bike_name
-      }}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <p>Username: {{ booking.username }}</p>
-      <p>Start Time: {{ booking.startTime | date }}</p>
-      <p>End Time: {{ booking.endTime | date }}</p>
-      <p
-        [ngStyle]="{
-          color:
-            booking.status === 'Pending'
-              ? 'grey'
-              : booking.status === 'Approved'
-              ? 'green'
-              : 'red'
-        }"
-      >
-        Status: {{ booking.status }}
-      </p>
-    </mat-card-content>
-    <mat-card-actions class="button-container">
-      <button
-        mat-stroked-button
-        color="primary"
-        class="action-button"
-        *ngIf="
-          booking.status !== 'Approved' || booking.status === 'Not Accepted'
-        "
-        (click)="changeBookingStatus(booking.id, 'Approved')"
-      >
-        Approve
-      </button>
-      <button
-        mat-stroked-button
-        color="warn"
-        class="action-button"
-        *ngIf="
-          booking.status !== 'Not Approved' || booking.status === 'Approved'
-        "
-        (click)="changeBookingStatus(booking.id, 'Not Approved')"
-      >
-        Reject
-      </button>
-    </mat-card-actions>
-  </mat-card>
+  <div class="cards-container" *ngIf="!isLoading && isBookedBikesAvailable">
+    <mat-card class="bike-card" *ngFor="let booking of bookedBikes">
+      <mat-card-header class="card-header">
+        <div class="image-container">
+          <img [src]="defaultUrl + '/' + booking.image" alt="Bike Image" />
+        </div>
+        <mat-card-title class="card-title">{{
+          booking.bike_brand
+        }}</mat-card-title>
+        <mat-card-subtitle class="card-subtitle">{{
+          booking.bike_name
+        }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="card-content">
+        <p>Username: {{ booking.username }}</p>
+        <p>Start Time: {{ booking.startTime | date }}</p>
+        <p>End Time: {{ booking.endTime | date }}</p>
+        <p
+          [ngStyle]="{
+            color:
+              booking.status === 'Pending'
+                ? 'grey'
+                : booking.status === 'Approved'
+                ? 'green'
+                : 'red'
+          }"
+        >
+          Status: {{ booking.status }}
+        </p>
+      </mat-card-content>
+      <mat-card-actions class="button-container">
+        <button
+          mat-stroked-button
+          color="primary"
+          class="action-button"
+          *ngIf="
+            booking.status !== 'Approved' || booking.status === 'Not Accepted'
+          "
+          (click)="changeBookingStatus(booking.id, 'Approved')"
+        >
+          Approve
+        </button>
+        <button
+          mat-stroked-button
+          color="warn"
+          class="action-button"
+          *ngIf="
+            booking.status !== 'Not Approved' || booking.status === 'Approved'
+          "
+          (click)="changeBookingStatus(booking.id, 'Not Approved')"
+        >
+          Reject
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </div>

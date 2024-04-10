@@ -12,6 +12,10 @@ import { default_url } from 'src/app/constants/constant';
 export class AdminDashboardComponent implements OnInit {
   public allBikes: any;
   public defaultUrl = default_url;
+  public bookedBikesArray: any;
+  public pendingRequest: number = 0;
+  public approvedRequest: number = 0;
+  public notApprovedRequest: number = 0;
 
   constructor(
     private adminService: AdminService,
@@ -20,6 +24,7 @@ export class AdminDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllBikes();
+    this.getBookingsData();
   }
 
   public getAllBikes(): void {
@@ -27,7 +32,7 @@ export class AdminDashboardComponent implements OnInit {
       next: (res: any) => {
         if (res.success) {
           this.allBikes = res.result;
-          console.log('in dashboard', this.allBikes)
+          console.log('in dashboard', this.allBikes);
         } else {
           this.snackbar.openSnackBar(res.error, 'Close', 'error-snackbar');
         }
@@ -50,6 +55,37 @@ export class AdminDashboardComponent implements OnInit {
       },
       error: (err) => {
         this.snackbar.openSnackBar(err.error.error, 'Close', 'error-snackbar');
+      },
+    });
+  }
+
+  public getBookingsData(): void {
+    this.adminService.getAllBikes().subscribe({
+      next: (res: any) => {
+        if (res.success) {
+          const bikeData = res.result;
+          bikeData.forEach((item: any) => {
+            if (item?.booking) {
+              const bookingData = item.booking;
+              bookingData.forEach((bookingItem: any) => {
+                if (bookingItem.status === 'Pending') {
+                  this.pendingRequest += 1;
+                } else if (bookingItem.status === 'Approved') {
+                  this.approvedRequest += 1;
+                } else {
+                  this.notApprovedRequest += 1;
+                }
+              });
+            } else {
+              console.log('No booking data available');
+            }
+          });
+        } else {
+          console.log('Error occured while fetching data');
+        }
+      },
+      error: (err) => {
+        console.log('Error occured', err);
       },
     });
   }

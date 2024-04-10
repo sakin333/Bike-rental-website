@@ -1,13 +1,30 @@
 <div class="main-container">
-  <img src="../../../assets/bike-home.png" alt="bike" class="bike-home-image" />
+  <div class="image-container">
+    <img
+      src="../../../assets/chevron-left.svg"
+      class="chevron chevron-left"
+      (click)="navigate(-1)"
+    />
+    <img src="{{ currentImage }}" alt="bike" class="bike-home-image" />
+    <img
+      src="../../../assets/chevron-right.svg"
+      class="chevron chevron-right"
+      (click)="navigate(1)"
+    />
+  </div>
   <div class="hero-card">
     <div class="card-header">
-      <h2 class="card-title">Rent Your Dream Bike Today</h2>
+      <h1 class="card-title">Rent Your Dream Bike <br />Today</h1>
       <p class="card-subtitle">
         Explore our wide range of bikes and start your adventure.
       </p>
     </div>
-    <button mat-flat-button color="primary" (click)="onExploreClicked()">
+    <button
+      mat-flat-button
+      color="primary"
+      (click)="onExploreClicked()"
+      class="explore-bike-button"
+    >
       Explore Bikes
     </button>
   </div>

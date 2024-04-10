@@ -44,6 +44,8 @@ export class GetBookingsComponent implements OnInit {
           .subscribe({
             next: (res: any) => {
               if (res.success) {
+                // this.isLoading = true;
+                // this.getBookingsDetails();
                 this.bookedBikes.find((bike) => bike.id === bookingId).status =
                   status;
                 this.cdr.detectChanges();
@@ -53,6 +55,8 @@ export class GetBookingsComponent implements OnInit {
                   'success-snackbar'
                 );
               } else {
+                // this.isLoading = true;
+                // this.getBookingsDetails();
                 this.bookedBikes.find((bike) => bike.id === bookingId).status =
                   status;
                 this.cdr.detectChanges();

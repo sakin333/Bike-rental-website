@@ -1,12 +1,19 @@
+.wrapper {
+  min-height: 90vh;
+  background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .bike-details {
   display: flex;
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 20px;
-  margin: 20px 0;
   background-color: #fff;
   max-width: 1100px;
-  margin: 80px auto 0 auto;
+  margin: 0 auto 0 auto;
 }
 
 .details {
@@ -37,6 +44,7 @@
   font-size: 16px;
   color: #555;
   margin-bottom: 20px;
+  line-height: 24px;
 }
 
 .details p {
@@ -69,4 +77,3 @@
     margin: 30px auto 0 auto;
   }
 }
-

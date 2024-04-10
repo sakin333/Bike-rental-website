@@ -1,8 +1,9 @@
 .main-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
 }
 
 mat-card-title {
@@ -11,6 +12,7 @@ mat-card-title {
 }
 
 mat-card {
+  width: 500px;
   padding: 1.5em 1.5em;
 }
 

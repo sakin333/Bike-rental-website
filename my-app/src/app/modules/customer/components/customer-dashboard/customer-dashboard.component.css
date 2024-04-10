@@ -2,12 +2,15 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  padding-top: 22px;
+  background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
 }
 
 mat-card {
   width: 340px;
   margin: 16px;
   padding: 8px;
+  border-radius: 16px;
 }
 
 mat-card-content {
@@ -19,6 +22,8 @@ img {
   max-width: calc(350px - 16px);
   height: 180px;
   object-fit: cover;
+  border: 1px solid rgb(220, 215, 215);
+  border-radius: 8px;
 }
 
 .details {

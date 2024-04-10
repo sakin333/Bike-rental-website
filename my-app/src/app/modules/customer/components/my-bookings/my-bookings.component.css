@@ -1,16 +1,17 @@
-table,
-th,
-tr,
-td {
-  border: 1px solid black;
-  border-collapse: collapse;
-}
-
-.main-container {
+.spinner {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.main-container {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+  padding: 42px 0;
 }
 
 .no-bikes-text {
@@ -19,8 +20,10 @@ td {
 }
 
 .bookings-title {
-  margin-top: 16px;
+  padding-bottom: 16px;
   text-align: center;
+  font-weight: 500;
+  font-size: 32px;
 }
 
 .mat-elevation-z8 {
@@ -47,22 +50,36 @@ th.mat-header-cell {
 }
 
 .card-container {
-  width: 70%;
+  width: 90%;
   margin: 0 auto;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr 1fr;
 }
 
 .card {
-  margin-bottom: 16px;
   position: relative;
+  width: 90%;
+  margin: 0 auto 16px auto;
 }
 
 .card mat-card {
   padding: 0 0 20px 20px;
+  border-radius: 16px;
 }
 
 img {
   width: 100%;
   height: auto;
+}
+
+.card-for-larger-width .card-subtitle {
+  font-size: 16px;
+}
+
+.card-for-larger-width .card-content > p {
+  margin-top: 8px;
+  font-size: 16px;
 }
 
 .card-for-larger-width .image-container {
@@ -80,11 +97,13 @@ img {
 .button-container {
   display: flex;
   gap: 16px;
+  margin-top: 8px;
 }
 
 @media screen and (max-width: 720px) {
   .card-container {
     width: 90%;
+    grid-template-columns: 1fr;
   }
 
   .card-for-larger-width {

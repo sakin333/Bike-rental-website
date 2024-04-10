@@ -1,5 +1,5 @@
-// export const default_url = 'http://10.10.100.228:4000';
-export const default_url = 'http://192.168.1.67:4000';
+export const default_url = 'http://10.10.100.27:4000';
+// export const default_url = 'http://192.168.1.67:4000';
 
 export const bikeBrands: string[] = [
   'Bajaj',

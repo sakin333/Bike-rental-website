@@ -1,8 +1,7 @@
-<header>
-  <h1>Customers' Testimonials</h1>
-</header>
-
 <div class="main-container">
+  <header>
+    <h1 class="testimonials-title">Customers' Testimonials</h1>
+  </header>
   <div class="testimonial-container">
     <div *ngFor="let testimonial of testimonials" class="testimonial-card">
       <mat-card class="testimonial-card-inner">
@@ -19,7 +18,9 @@
               {{ testimonial.improvement | ellipsis : 50 }}
             </div>
             <div class="user-info">
-              <span>{{ testimonial.user.username | uppercase }}</span>
+              <span class="username">{{
+                testimonial.user.username | uppercase
+              }}</span>
               <span class="email">{{ testimonial.user.email }}</span>
             </div>
           </div>
@@ -38,6 +39,3 @@
     </div>
   </div>
 </div>
-
-
-

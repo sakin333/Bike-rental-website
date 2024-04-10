@@ -1,8 +1,24 @@
-.main-container {
+.spinner {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 90vh;
+  background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+  padding: 42px 0;
+}
+
+.title {
+  padding-bottom: 16px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 32px;
 }
 
 .mat-column-bikeBrand,
@@ -13,24 +29,6 @@
 .mat-column-changeStatus,
 .mat-column-userName {
   border-right: 1px solid #ccc;
-}
-
-.mat-elevation-z8 {
-  border: 2px solid #ccc;
-  border-radius: 8px;
-  margin-top: 16px;
-}
-
-th.mat-header-cell {
-  font-weight: bold;
-}
-
-td.mat-cell.accepted {
-  color: green;
-}
-
-td.mat-cell.pending {
-  color: red;
 }
 
 .action-button {
@@ -52,18 +50,27 @@ td.mat-cell.pending {
 }
 
 .cards-container {
-  width: 70%;
+  width: 90%;
   margin: 0 auto;
   padding-top: 20px;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr 1fr;
 }
 
 .bike-card {
-  margin: 0 0 26px 0;
+  margin: 0 auto 26px auto;
+  width: 90%;
+  padding-left: 8px;
 }
 
 img {
   width: 100%;
   height: auto;
+}
+
+mat-card {
+  border-radius: 16px;
 }
 
 .image-container {
@@ -72,6 +79,11 @@ img {
   position: absolute;
   top: 16px;
   right: 10%;
+}
+
+.card-content {
+  margin-top: 8px;
+  font-size: 16px;
 }
 
 .button-container {
@@ -83,7 +95,6 @@ img {
     display: none;
   }
 }
-
 
 @media screen and (max-width: 400px) {
   .button-container {

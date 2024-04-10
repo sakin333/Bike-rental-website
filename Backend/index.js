@@ -472,14 +472,16 @@ app.post("/admin/booking", verifyToken, async (req, res) => {
           { "booking._id": req.query.bookingId },
           {
             $set: {
-              booking: {
-                name: req.body.name,
-                startTime: req.body.startTime,
-                endTime: req.body.endTime,
-                accepted: value,
-                status: req.query.status,
-                requestId: req.body.requestId,
-              },
+              // booking: {
+              //   name: req.body.name,
+              //   startTime: req.body.startTime,
+              //   endTime: req.body.endTime,
+              //   accepted: value,
+              //   status: req.query.status,
+              //   requestId: req.body.requestId,
+              // },
+              "booking.$.accepted": value,
+              "booking.$.status": req.query.status,
             },
           },
           { new: true }

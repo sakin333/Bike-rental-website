@@ -17,7 +17,7 @@ export class BookBikeComponent implements OnInit {
   public username: string =
     this.authService.getUser()?.username ?? 'No username found';
   public bikeID: string = this.activatedRoute.snapshot.params['id'];
-  public bikeToBeBooked: Bike | undefined;
+  public bikeToBeBooked: any;
   public bookingForm!: FormGroup;
   public bookings: any = [];
   public todayDate: Date = new Date();

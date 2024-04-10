@@ -8,10 +8,16 @@
       <a routerLink="/home" class="home-button">Home</a>
       <a routerLink="/about" class="about-button">About</a>
       <a routerLink="/testimonials" class="about-button">Testimonials</a>
-      <a mat-stroked-button color="primary" routerLink="/login" class="login-button">Login</a>
+      <a
+        mat-stroked-button
+        color="primary"
+        routerLink="/login"
+        class="login-button"
+        >Login</a
+      >
       <a
         mat-flat-button
-        color="warn"
+        color="primary"
         routerLink="/register"
         class="signup-button"
         >Signup</a
@@ -66,7 +72,11 @@
       <a mat-button routerLink="/admin/search" class="login-button"
         >Search bike</a
       >
-      <a mat-flat-button color="warn" class="signup-button" (click)="logout()"
+      <a
+        mat-flat-button
+        color="primary"
+        class="signup-button"
+        (click)="logout()"
         >Logout</a
       >
     </div>
@@ -87,7 +97,9 @@
       <a mat-button routerLink="/admin/bookings" class="menu-item">Bookings</a>
       <a mat-button routerLink="/admin/bike" class="menu-item">List a bike</a>
       <a mat-button routerLink="/admin/search" class="menu-item">Search bike</a>
-      <a mat-button color="warn" class="menu-item" (click)="logout()">Logout</a>
+      <a mat-button color="primary" class="menu-item" (click)="logout()"
+        >Logout</a
+      >
     </div>
   </mat-toolbar>
 
@@ -106,10 +118,18 @@
       <a mat-button routerLink="/customer/search-bike" class="login-button"
         >Search</a
       >
-      <button mat-button (click)="openFeedbackDialog()" class="login-button">
+      <button
+        mat-button
+        (click)="openFeedbackDialog()"
+        class="login-button feedback-menu"
+      >
         Feedback
       </button>
-      <a mat-flat-button color="warn" class="signup-button" (click)="logout()"
+      <a
+        mat-flat-button
+        color="primary"
+        class="signup-button"
+        (click)="logout()"
         >Logout</a
       >
     </div>
@@ -136,7 +156,9 @@
       <button mat-button (click)="openFeedbackDialog()" class="login-button">
         Feedback
       </button>
-      <a mat-button color="warn" class="menu-item" (click)="logout()">Logout</a>
+      <a mat-button color="primary" class="menu-item" (click)="logout()"
+        >Logout</a
+      >
     </div>
   </mat-toolbar>
 

@@ -4,6 +4,8 @@
   justify-content: center;
   height: 90vh;
   background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+  gap: 64px;
+  padding: 0 40px;
 }
 
 .hero-card {
@@ -15,25 +17,29 @@
 }
 
 .bike-home-image {
-  width: 100%;
-  max-width: 700px;
+  width: 700px;
   height: auto;
   margin-left: 32px;
 }
 
 .card-header {
   line-height: 24px;
-  text-align: center;
 }
 
 .card-title {
-  font-size: 40px;
-  line-height: 40px;
+  font-size: 64px;
+  line-height: 70px;
+  font-weight: 400;
 }
 
 .card-subtitle {
-  font-size: 18px;
-  margin-left: -48px;
+  font-size: 22px;
+  margin-left: 6px;
+}
+
+.explore-bike-button {
+  height: 50px;
+  margin-left: 6px;
 }
 
 footer {
@@ -50,8 +56,12 @@ footer .container {
 }
 
 .site-title {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
+}
+
+.contact-info > p {
+  font-size: 16px;
 }
 
 .social-links {
@@ -75,15 +85,60 @@ footer .container {
 .footer-menu ul li a {
   color: #333;
   text-decoration: none;
+  font-size: 16px;
+}
+
+.image-container {
+  display: flex;
+  align-items: center;
+}
+
+.chevron {
+  width: 50px;
+  height: 70px;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 720px) {
   .main-container {
     flex-direction: column;
+    gap: 32px;
+    padding: 0 20px;
   }
 
-  .hero-card {
-    align-items: center;
+  .chevron {
+    width: 30px;
+    height: 40px;
+    position: absolute;
+  }
+
+  .image-container {
+    position: relative;
+  }
+
+  .chevron-left {
+    top: 50%;
+    left: 0;
+  }
+
+  .chevron-right {
+    top: 50%;
+    right: 0;
+  }
+
+  .bike-home-image {
+    width: 300px;
+    height: 300px;
+  }
+
+  .card-title {
+    font-size: 36px;
+    line-height: 52px;
+  }
+
+  .card-subtitle {
+    font-size: 16px;
+    margin-left: 6px;
   }
 
   .card-title {
@@ -101,5 +156,10 @@ footer .container {
 
   .footer-menu {
     display: none;
+  }
+
+  .explore-bike-button {
+    height: 46px;
+    margin-left: 0;
   }
 }

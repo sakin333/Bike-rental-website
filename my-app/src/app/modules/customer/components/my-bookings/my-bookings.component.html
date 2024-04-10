@@ -1,90 +1,93 @@
+<mat-spinner *ngIf="isLoading" class="spinner"></mat-spinner>
+
 <div class="main-container">
-  <mat-spinner *ngIf="isLoading"></mat-spinner>
-</div>
+  <h1 class="bookings-title" *ngIf="!isLoading">My Bookings</h1>
 
-<h2 *ngIf="!isLoading && !isBookedBikesAvailable" class="no-bikes-text">
-  You haven't booked any bikes
-</h2>
+  <h2 *ngIf="!isLoading && !isBookedBikesAvailable" class="no-bikes-text">
+    You haven't booked any bikes
+  </h2>
 
-<h2 class="bookings-title">My Bookings</h2>
+  <div class="card-container" *ngIf="!isLoading && isBookedBikesAvailable">
+    <div class="card" *ngFor="let booking of bookedBikes">
+      <mat-card class="card-for-larger-width">
+        <mat-card-header class="card-header">
+          <div class="image-container">
+            <img [src]="defaultUrl + '/' + booking.image" alt="Bike Image" />
+          </div>
+          <mat-card-title class="card-title">{{
+            booking.bike_name
+          }}</mat-card-title>
+          <mat-card-subtitle class="card-subtitle">{{
+            booking.bike_brand
+          }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="card-content">
+          <p><strong>Start Time:</strong> {{ booking.startTime | date }}</p>
+          <p><strong>End Time:</strong> {{ booking.endTime | date }}</p>
+          <p
+            [ngStyle]="{
+              color:
+                booking.status === 'Pending'
+                  ? 'grey'
+                  : booking.status === 'Approved'
+                  ? 'green'
+                  : 'red'
+            }"
+          >
+            <strong>Status:</strong> {{ booking.status }}
+          </p>
+        </mat-card-content>
+        <mat-card-actions class="button-container">
+          <a routerLink="/customer/notifications/{{ booking.id }}">
+            <button mat-stroked-button color="primary">View Details</button>
+          </a>
+          <button
+            mat-stroked-button
+            color="warn"
+            (click)="cancelBooking(booking.id)"
+          >
+            Cancel
+          </button>
+        </mat-card-actions>
+      </mat-card>
 
-<div class="card-container" *ngIf="!isLoading && isBookedBikesAvailable">
-  <div class="card" *ngFor="let booking of bookedBikes">
-    <mat-card class="card-for-larger-width">
-      <mat-card-header class="card-header">
-        <div class="image-container">
-          <img [src]="defaultUrl + '/' + booking.image" alt="Bike Image" />
-        </div>
-        <mat-card-title>{{ booking.bike_name }}</mat-card-title>
-        <mat-card-subtitle>{{ booking.bike_brand }}</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <p><strong>Start Time:</strong> {{ booking.startTime | date }}</p>
-        <p><strong>End Time:</strong> {{ booking.endTime | date }}</p>
-        <p
-          [ngStyle]="{
-            color:
-              booking.status === 'Pending'
-                ? 'grey'
-                : booking.status === 'Approved'
-                ? 'green'
-                : 'red'
-          }"
-        >
-          <strong>Status:</strong> {{ booking.status }}
-        </p>
-      </mat-card-content>
-      <mat-card-actions class="button-container">
-        <a routerLink="/customer/notifications/{{ booking.id }}">
-          <button mat-stroked-button color="primary">View Details</button>
-        </a>
-        <button
-          *ngIf="booking.status === 'Pending'"
-          mat-stroked-button
-          color="warn"
-          (click)="cancelBooking(booking.id)"
-        >
-          Cancel
-        </button>
-      </mat-card-actions>
-    </mat-card>
-
-    <mat-card class="card-for-smaller-width">
-      <mat-card-header>
-        <div class="image-container">
-          <img [src]="defaultUrl + '/' + booking.image" alt="Bike Image" />
-        </div>
-        <mat-card-title>{{ booking.bike_name }}</mat-card-title>
-        <mat-card-subtitle>{{ booking.bike_brand }}</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <p><strong>Start Time:</strong> {{ booking.startTime | date }}</p>
-        <p><strong>End Time:</strong> {{ booking.endTime | date }}</p>
-        <p
-          [ngStyle]="{
-            color:
-              booking.status === 'Pending'
-                ? 'grey'
-                : booking.status === 'Approved'
-                ? 'green'
-                : 'red'
-          }"
-        >
-          <strong>Status:</strong> {{ booking.status }}
-        </p>
-      </mat-card-content>
-      <mat-card-actions class="button-container">
-        <a routerLink="/customer/notifications/{{ booking.id }}">
-          <button mat-stroked-button color="primary">View Details</button>
-        </a>
-        <button
-          mat-stroked-button
-          color="warn"
-          (click)="cancelBooking(booking.id)"
-        >
-          Cancel
-        </button>
-      </mat-card-actions>
-    </mat-card>
+      <mat-card class="card-for-smaller-width">
+        <mat-card-header>
+          <div class="image-container">
+            <img [src]="defaultUrl + '/' + booking.image" alt="Bike Image" />
+          </div>
+          <mat-card-title>{{ booking.bike_name }}</mat-card-title>
+          <mat-card-subtitle>{{ booking.bike_brand }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p><strong>Start Time:</strong> {{ booking.startTime | date }}</p>
+          <p><strong>End Time:</strong> {{ booking.endTime | date }}</p>
+          <p
+            [ngStyle]="{
+              color:
+                booking.status === 'Pending'
+                  ? 'grey'
+                  : booking.status === 'Approved'
+                  ? 'green'
+                  : 'red'
+            }"
+          >
+            <strong>Status:</strong> {{ booking.status }}
+          </p>
+        </mat-card-content>
+        <mat-card-actions class="button-container">
+          <a routerLink="/customer/notifications/{{ booking.id }}">
+            <button mat-stroked-button color="primary">View Details</button>
+          </a>
+          <button
+            mat-stroked-button
+            color="warn"
+            (click)="cancelBooking(booking.id)"
+          >
+            Cancel
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
   </div>
 </div>

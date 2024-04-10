@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerService } from '../../services/customer.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { default_url } from 'src/app/constants/constant';
 
 @Component({
   selector: 'app-bike-details',
@@ -10,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class BikeDetailsComponent implements OnInit {
   public bikeDetails: any;
   public bikeId: string | null = null;
+  public defaultUrl = default_url;
 
   constructor(
     private customerService: CustomerService,

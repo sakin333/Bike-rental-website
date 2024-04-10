@@ -16,7 +16,7 @@
 }
 
 .navbar-title {
-  font-size: 1em;
+  font-size: 24px;
   color: #333;
 }
 
@@ -27,8 +27,13 @@
 }
 
 .nav-links-container a {
-  margin-right: 20px;
-  font-size: 0.7em;
+  margin-right: 26px;
+  font-size: 18px;
+}
+
+.feedback-menu {
+  font-size: 18px;
+  margin-right: 26px;
 }
 
 .home-button,
@@ -41,6 +46,11 @@
 .login-button,
 .signup-button {
   margin-right: 32px;
+}
+
+.login-button,
+.signup-button {
+  height: 40px;
 }
 
 .menu-button-container {

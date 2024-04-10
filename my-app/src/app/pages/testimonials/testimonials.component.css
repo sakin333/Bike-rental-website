@@ -4,12 +4,19 @@ header {
   text-align: center;
 }
 
+.testimonials-title {
+  font-size: 38px;
+  font-weight: 500;
+}
+
 .main-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 120px;
+  justify-content: center;
+  height: 90vh;
   padding: 0 40px;
+  background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
 }
 
 .testimonial-container {
@@ -31,13 +38,15 @@ header {
   flex: 0 0 auto;
   margin: 0 26px 0 0;
   width: 300px;
-  
+  border-radius: 18px;
+  overflow: hidden;
 }
 
 .testimonial-card-inner {
   width: 300px;
   height: 300px;
   margin: 0 26px 26px 0;
+  border-radius: 22px;
 }
 
 .profile-image-container {
@@ -51,6 +60,7 @@ header {
 .profile-image {
   width: 100%;
   height: auto;
+  margin-bottom: 16px;
 }
 
 .user-info {
@@ -59,8 +69,17 @@ header {
   margin-top: 8px;
 }
 
+.improvement {
+  margin-bottom: 16px;
+}
+
+.improvement,
+.username {
+  font-size: 16px;
+}
+
 .email {
-  font-size: 0.8em;
+  font-size: 12px;
 }
 
 .card-footer {
@@ -76,9 +95,10 @@ header {
 }
 
 .rating mat-icon {
-  font-size: 20px;
+  font-size: 24px;
   color: orange;
   margin-right: 4px;
+  margin-bottom: 8px;
 }
 
 .content-wrapper {

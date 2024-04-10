@@ -1,3 +1,11 @@
+.wrapper {
+  min-height: 90vh;
+  background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .card-container {
   display: flex;
   flex-wrap: wrap;
