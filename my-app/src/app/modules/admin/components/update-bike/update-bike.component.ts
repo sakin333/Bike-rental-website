@@ -77,16 +77,6 @@ export class UpdateBikeComponent implements OnInit {
 
   public onUpdateBike(): void {
     if (this.updateForm.valid) {
-      // const data = {
-      //   bike_brand: this.updateForm.value['bike_brand'],
-      //   bike_name: this.updateForm.value['bike_name'].toUpperCase(),
-      //   model_year: this.updateForm.value['model_year'],
-      //   type: this.updateForm.value['type'],
-      //   price: this.updateForm.value['price'],
-      //   image: this.updateForm.value['image'],
-      //   description: this.updateForm.value['description'],
-      // };
-
       const formData = new FormData();
       formData.append('bike_brand', this.updateForm.get('bike_brand')!.value);
       formData.append(

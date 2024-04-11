@@ -60,7 +60,7 @@ mat-form-field {
   height: 40px;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 720px) {
   mat-card {
     width: 300px;
     margin: 0 auto;

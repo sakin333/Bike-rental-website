@@ -1,4 +1,4 @@
-export const default_url = 'http://10.10.100.86:4000';
+export const default_url = 'http://172.17.16.190:4000';
 // export const default_url = 'http://192.168.1.67:4000';
 
 export const bikeBrands: string[] = [

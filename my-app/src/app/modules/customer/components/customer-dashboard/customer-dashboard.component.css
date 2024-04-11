@@ -22,7 +22,7 @@ img {
   max-width: calc(350px - 16px);
   height: 180px;
   object-fit: cover;
-  border: 1px solid rgb(220, 215, 215);
+  /* border: 1px solid rgb(220, 215, 215); */
   border-radius: 8px;
 }
 

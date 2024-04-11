@@ -106,7 +106,11 @@ header {
   overflow: auto;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 720px) {
+  .testimonials-title {
+    line-height: 40px;
+  }
+
   .testimonial-container {
     width: 100%;
     flex-direction: column;
@@ -123,6 +127,11 @@ header {
     height: 260px;
     margin-right: 0;
     padding: 8px;
+  }
+
+  .profile-image-container {
+    width: 40px;
+    height: 40px;
   }
 
   .user-info {

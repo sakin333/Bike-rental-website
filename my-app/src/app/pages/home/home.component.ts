@@ -17,14 +17,13 @@ export class HomeComponent implements OnInit {
     '../../../assets/fszs.png',
   ];
   currentImage: string = this.images[0];
-  slideDirection: string = 'right';
+  // slideDirection: string = 'right';
 
   public navigate(direction: number): void {
     const currentIndex = this.images.indexOf(this.currentImage);
-    const newIndex =
-      (currentIndex + direction + this.images.length) % this.images.length;
+    const newIndex = (currentIndex + direction) % this.images.length;
     this.currentImage = this.images[newIndex];
-    this.slideDirection = direction === 1 ? 'right' : 'left';
+    // this.slideDirection = direction === 1 ? 'right' : 'left';
   }
 
   ngOnInit(): void {
