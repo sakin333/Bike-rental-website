@@ -60,12 +60,12 @@
 
 .bike-card {
   margin: 0 auto 26px auto;
-  width: 90%;
-  padding-left: 8px;
+  width: 80%;
+  padding: 12px 0 12px 12px;
 }
 
 img {
-  width: 100%;
+  width: 120%;
   height: auto;
 }
 
@@ -91,6 +91,10 @@ mat-card {
 }
 
 @media screen and (max-width: 720px) {
+  .cards-container {
+    grid-template-columns: 1fr;
+  }
+
   .image-container {
     display: none;
   }

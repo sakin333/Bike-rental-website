@@ -41,10 +41,12 @@ export class BookBikeComponent implements OnInit {
 
     this.bookingForm.get('dateFrom')?.valueChanges.subscribe(() => {
       this.dateFromValidator();
+      this.dateToValidator();
     });
 
     this.bookingForm.get('dateTo')?.valueChanges.subscribe(() => {
       this.dateToValidator();
+      this.dateFromValidator();
     });
   }
 
@@ -60,7 +62,7 @@ export class BookBikeComponent implements OnInit {
   public dateToValidator(): void {
     const inputFromDate = this.bookingForm.get('dateFrom')?.value;
     const inputToDate = this.bookingForm.get('dateTo')?.value;
-    if (inputFromDate && inputToDate <= inputFromDate) {
+    if (inputFromDate && inputToDate < inputFromDate) {
       this.bookingForm.get('dateTo')?.setErrors({ invalidToDate: true });
     }
   }
@@ -76,11 +78,48 @@ export class BookBikeComponent implements OnInit {
   }
 
   public bookBike(): void {
+    const bookingArray = this.bikeToBeBooked.booking;
+
+    const isAlreadyBooked = bookingArray.some((booking: any) => {
+      const startTime = new Date(booking.startTime).toISOString();
+      const endTime = new Date(booking.endTime).toISOString();
+
+      const inputStartTime = new Date(
+        this.bookingForm.get('dateFrom')?.value
+      ).toISOString();
+      const inputEndTime = new Date(
+        this.bookingForm.get('dateTo')?.value
+      ).toISOString();
+
+      return (
+        (this.bikeToBeBooked._id === this.bikeID &&
+          booking.requestId === this.userId &&
+          startTime < inputEndTime &&
+          endTime > inputStartTime) ||
+        (this.bikeToBeBooked._id === this.bikeID &&
+          booking.requestId === this.userId &&
+          startTime === inputStartTime &&
+          endTime === inputEndTime)
+      );
+    });
+
+    console.log('Already booked', isAlreadyBooked);
+
+    if (isAlreadyBooked) {
+      this.snackbar.openSnackBar(
+        'You have alrady booked this bike in this time slot',
+        'close',
+        'error-snackbar'
+      );
+      return;
+    }
+
     let bookingData = {
       startTime: this.bookingForm.get('dateFrom')?.value,
       endTime: this.bookingForm.get('dateTo')?.value,
       name: this.bookingForm.get('name')?.value,
     };
+    // console.log(bookingData, 'sent booking data');
     this.customerService
       .bookBikes(this.userId, this.bikeID, bookingData)
       .subscribe({

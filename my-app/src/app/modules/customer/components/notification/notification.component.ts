@@ -11,6 +11,7 @@ export class NotificationComponent implements OnInit {
   public message: string = '';
   public bookingId: string | null = null;
   public bikeDetails: any;
+  public bookingDetailsNotification: any;
 
   constructor(
     private customerService: CustomerService,
@@ -26,8 +27,15 @@ export class NotificationComponent implements OnInit {
     this.customerService.getBookingsById(this.bookingId).subscribe({
       next: (res: any) => {
         this.bikeDetails = res.result;
-        if (this.bikeDetails && this.bikeDetails.booking[0].status) {
-          this.generateMessage(this.bikeDetails.booking[0].status);
+        const bookingData = this.bikeDetails.booking;
+        this.bookingDetailsNotification = bookingData.filter((item: any) => {
+          return item._id === this.bookingId;
+        });
+        if (
+          this.bookingDetailsNotification.length > 0 &&
+          this.bookingDetailsNotification[0].status
+        ) {
+          this.generateMessage(this.bookingDetailsNotification[0].status);
         }
       },
       error: (err) => {

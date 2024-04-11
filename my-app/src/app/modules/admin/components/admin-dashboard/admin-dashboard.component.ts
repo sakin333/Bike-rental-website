@@ -32,7 +32,7 @@ export class AdminDashboardComponent implements OnInit {
       next: (res: any) => {
         if (res.success) {
           this.allBikes = res.result;
-          console.log('in dashboard', this.allBikes);
+          // console.log('in dashboard', this.allBikes);
         } else {
           this.snackbar.openSnackBar(res.error, 'Close', 'error-snackbar');
         }

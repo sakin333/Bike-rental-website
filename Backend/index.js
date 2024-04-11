@@ -112,7 +112,7 @@ app.post("/addBike", verifyToken, upload.single("image"), async (req, res) => {
         req.body.price &&
         req.file.path
       ) {
-        console.log("file path", req.file.path);
+        // console.log("file path", req.file.path);
         let data = new Bike({
           bike_brand: req.body.bike_brand,
           bike_name: req.body.bike_name,
@@ -238,13 +238,25 @@ app.post("/booking", verifyToken, async (req, res) => {
           let bikeData = await Bike.findOne({ _id: req.query.bikeId });
           if (bikeData) {
             if (req.body.startTime && req.body.endTime) {
-              let startTime = new Date(req.body.startTime);
-              let endTime = new Date(req.body.endTime);
+              let startTime = new Date(req.body.startTime).toISOString();
+              let endTime = new Date(req.body.endTime).toISOString();
+
               let bookingCheck = await Bike.findOne({
                 _id: req.query.bikeId,
-                "booking.startTime": { $lt: endTime },
-                "booking.endTime": { $gt: startTime },
+                // "booking.startTime": { $lt: endTime },
+                // "booking.endTime": { $gt: startTime },
+                $or: [
+                  {
+                    "booking.startTime": startTime,
+                    "booking.endTime": endTime,
+                  },
+                  {
+                    "booking.startTime": { $lt: endTime },
+                    "booking.endTime": { $gt: startTime },
+                  },
+                ],
               });
+
               if (
                 bookingCheck
                 // bookingCheck.booking &&
@@ -271,7 +283,7 @@ app.post("/booking", verifyToken, async (req, res) => {
                   { new: true }
                 );
                 book = book.toObject();
-                console.log("here", book);
+                // console.log("here", book);
                 res.status(200).json({
                   success: true,
                   message: "Successfully sent request",
@@ -303,7 +315,7 @@ app.post("/cancel-booking", verifyToken, async (req, res) => {
       if (req.query.bookingId) {
         let booking = await Bike.findOne({
           "booking._id": req.query.bookingId,
-          "booking.status": "Pending",
+          // "booking.status": "Pending",
         });
 
         if (booking) {

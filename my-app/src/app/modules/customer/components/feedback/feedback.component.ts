@@ -41,13 +41,13 @@ export class FeedbackComponent implements OnInit {
   public rating(index: number): void {
     this.selectedStar = index + 1;
     this.feedbackForm.controls['rating'].setValue(this.selectedStar);
-    console.log('selected star', this.selectedStar);
+    // console.log('selected star', this.selectedStar);
   }
 
   public onFeedbackSubmit() {
     this.formSubmitted = true;
     if (this.feedbackForm.valid) {
-      console.log('feedbaack form', this.feedbackForm);
+      // console.log('feedbaack form', this.feedbackForm);
       const data = {
         rating: this.feedbackForm.value['rating'],
         improvement: this.feedbackForm.value['improvement'],
@@ -59,7 +59,6 @@ export class FeedbackComponent implements OnInit {
       feedbackObservable.subscribe({
         next: (res: any) => {
           if (res.success) {
-            console.log('result', res.result);
             this.snackbarService.openSnackBar(
               'Thank you for your feedback',
               'Close',

@@ -19,7 +19,6 @@ export class TestimonialsComponent implements OnInit {
       next: (res: any) => {
         if (res.success) {
           this.testimonials = res.result;
-          console.log(this.testimonials);
         }
       },
       error: (err) => {

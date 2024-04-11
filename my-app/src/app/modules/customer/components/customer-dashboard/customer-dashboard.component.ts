@@ -26,7 +26,7 @@ export class CustomerDashboardComponent {
     this.customerService.getAllBikes().subscribe({
       next: (res: any) => {
         if (res.success) {
-          console.log('here', res);
+          // console.log('here', res);
           this.allBikes = res.result;
         } else {
           this.snackbar.openSnackBar(res.error, 'Close', 'error-snackbar');

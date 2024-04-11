@@ -59,17 +59,17 @@ th.mat-header-cell {
 
 .card {
   position: relative;
-  width: 90%;
+  width: 80%;
   margin: 0 auto 8px auto;
 }
 
 .card mat-card {
-  padding: 0 0 10px 20px;
   border-radius: 16px;
+  padding: 12px 20px 8px 12px;
 }
 
 img {
-  width: 100%;
+  width: 120%;
   height: auto;
 }
 
@@ -86,7 +86,7 @@ img {
   width: 280px;
   height: 200px;
   position: absolute;
-  top: 16px;
+  top: -2px;
   right: 10%;
 }
 
@@ -121,5 +121,9 @@ img {
 
   .button-container {
     align-items: center;
+  }
+
+  .card mat-card {
+    padding: 12px;
   }
 }

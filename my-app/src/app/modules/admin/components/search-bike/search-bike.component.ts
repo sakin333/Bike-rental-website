@@ -47,6 +47,11 @@ export class SearchBikeComponent {
     this.isOptionShown = !this.isOptionShown;
   }
 
+  public clearForm(event: Event): void {
+    event.preventDefault();
+    this.searchForm.reset();
+  }
+
   public onSearchBike(): void {
     this.searchClicked = true;
     this.adminService.getAllBikes().subscribe({

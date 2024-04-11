@@ -19,12 +19,12 @@
     </mat-card>
     <mat-card class="date-form-card">
       <form class="date-card" [formGroup]="bookingForm" (ngSubmit)="bookBike()">
-        <mat-form-field>
+        <mat-form-field appearance="outline">
           <input matInput placeholder="Your Name" formControlName="name" />
           <mat-error> *Name is required </mat-error>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field appearance="outline">
           <mat-label>Choose "FROM" date</mat-label>
           <input
             matInput
@@ -48,7 +48,7 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field appearance="outline">
           <mat-label>Choose "TO" date</mat-label>
           <input
             matInput

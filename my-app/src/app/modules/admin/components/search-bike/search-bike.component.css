@@ -182,6 +182,7 @@ mat-card-actions {
 
 .min-max-price-container {
   display: flex;
+  flex-direction: row;
   gap: 16px;
 }
 
@@ -222,9 +223,26 @@ mat-card-actions {
   justify-content: center;
 }
 
+.clear-form-button {
+  width: 100px;
+}
+
 @media screen and (max-width: 720px) {
   .search-form-container {
     width: 80%;
+  }
+
+  .option-container {
+    width: 200px;
+  }
+
+  mat-form-field {
+    font-size: 12px;
+  }
+
+  .min-max-price-container {
+    flex-direction: column;
+    gap: 0;
   }
 }
 

@@ -53,7 +53,7 @@ export class UpdateBikeComponent implements OnInit {
         this.bikeToBeUpdated = res.result.find(
           (element: any) => element._id === this.bikeID
         );
-        console.log(this.bikeToBeUpdated);
+        // console.log(this.bikeToBeUpdated);
         this.patchUpdateFormValue();
       },
     });
